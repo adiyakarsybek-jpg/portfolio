@@ -76,10 +76,10 @@ export function StatusChip({ status, className = '' }) {
   return (
     <span
       className={`chip label inline-flex items-center gap-1.5 px-2 py-[3px] border ${
-        strong ? 'border-accent text-accent-ink' : 'border-rule text-graphite'
+        strong ? 'border-line text-accent-ink' : 'border-rule text-graphite'
       } ${className}`}
     >
-      {status === 'ongoing' && <span className="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true" />}
+      {status === 'ongoing' && <span className="w-1.5 h-1.5 rounded-full bg-accent ring-1 ring-line" aria-hidden="true" />}
       {t(`status.${status}`)}
     </span>
   );
@@ -98,7 +98,7 @@ function rng(seed) {
   };
 }
 
-export function PlaceholderArt({ seed = 'x', motif = 'blocks', label = true, slug, ink = 'rgb(var(--ink))', accent = 'rgb(var(--accent))', bg = 'bg-sheet' }) {
+export function PlaceholderArt({ seed = 'x', motif = 'blocks', label = true, slug, ink = 'rgb(var(--ink))', accent = 'rgb(var(--accent))', edge = 'rgb(var(--line))', bg = 'bg-sheet' }) {
   const { t } = useLang();
   const r = rng(seed + motif);
   const W = 400, H = 300;
@@ -118,7 +118,8 @@ export function PlaceholderArt({ seed = 'x', motif = 'blocks', label = true, slu
     art = (
       <>
         {rings}
-        <path d={`M-10 ${240 + r() * 30} C 120 ${170 + r() * 40}, 230 ${300}, 410 ${150 + r() * 40}`} fill="none" stroke={accent} strokeWidth={5} />
+        <path d={`M-10 ${240 + r() * 30} C 120 ${170 + r() * 40}, 230 ${300}, 410 ${150 + r() * 40}`} fill="none" stroke={edge} strokeWidth={9} />
+        <path d={`M-10 ${240 + r() * 30} C 120 ${170 + r() * 40}, 230 ${300}, 410 ${150 + r() * 40}`} fill="none" stroke={accent} strokeWidth={6} />
       </>
     );
   } else if (motif === 'dots') {
@@ -126,7 +127,7 @@ export function PlaceholderArt({ seed = 'x', motif = 'blocks', label = true, slu
     for (let y = 18; y < H; y += 18)
       for (let x = 18; x < W; x += 18) {
         const hit = r() > 0.86;
-        items.push(<circle key={`${x}-${y}`} cx={x} cy={y} r={hit ? 4 : 1.4} fill={hit ? accent : ink} fillOpacity={hit ? 1 : 0.45} />);
+        items.push(<circle key={`${x}-${y}`} cx={x} cy={y} r={hit ? 4 : 1.4} fill={hit ? accent : ink} fillOpacity={hit ? 1 : 0.45} stroke={hit ? edge : 'none'} strokeWidth={1} />);
       }
     art = <>{items}</>;
   } else if (motif === 'lines') {
@@ -149,7 +150,7 @@ export function PlaceholderArt({ seed = 'x', motif = 'blocks', label = true, slu
           <rect key={`${x}-${y}`} x={x} y={y} width={w} height={h}
             fill={v > 0.93 ? accent : v > 0.3 ? ink : 'none'}
             fillOpacity={v > 0.93 ? 1 : 0.85}
-            stroke={ink} strokeOpacity={v > 0.3 ? 0 : 0.35} strokeWidth={0.7} />,
+            stroke={v > 0.93 ? edge : ink} strokeOpacity={v > 0.93 ? 1 : v > 0.3 ? 0 : 0.35} strokeWidth={v > 0.93 ? 1.2 : 0.7} />,
         );
         x += w + 8;
       }
@@ -164,7 +165,7 @@ export function PlaceholderArt({ seed = 'x', motif = 'blocks', label = true, slu
         {art}
       </svg>
       {label && (
-        <span title={slug ? `Add images to src/assets/projects/${slug}/` : undefined} className="absolute left-2 bottom-2 label bg-paper/90 text-accent-ink px-1.5 py-0.5 border border-dashed border-accent">
+        <span title={slug ? `Add images to src/assets/projects/${slug}/` : undefined} className="absolute left-2 bottom-2 label bg-paper/90 text-accent-ink px-1.5 py-0.5 border border-dashed border-accent-ink">
           {t('ph.image')}
         </span>
       )}

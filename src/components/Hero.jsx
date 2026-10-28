@@ -113,15 +113,15 @@ function CityGrid() {
           <path d={riverPath} fill="none" stroke="rgb(var(--ink))" strokeWidth="0.8" strokeDasharray="1 5" transform="translate(0 22)" />
         </g>
         {/* study area */}
-        <polygon className="map-draw" points="300,150 560,118 612,300 470,392 318,346" fill="rgb(var(--mark))" style={{ fillOpacity: 'var(--mark-op)' }} stroke="rgb(var(--accent))" strokeWidth="2.5" strokeDasharray="10 6" />
-        <circle cx="452" cy="250" r="7" fill="rgb(var(--accent))" />
-        <circle cx="452" cy="250" r="20" fill="none" stroke="rgb(var(--accent))" strokeWidth="1.5" />
+        <polygon className="map-draw" points="300,150 560,118 612,300 470,392 318,346" fill="rgb(var(--mark))" style={{ fillOpacity: 'var(--mark-op)' }} stroke="rgb(var(--line))" strokeWidth="2.5" strokeDasharray="10 6" />
+        <circle cx="452" cy="250" r="7" fill="rgb(var(--accent))" stroke="rgb(var(--line))" strokeWidth="1.5" />
+        <circle cx="452" cy="250" r="20" fill="none" stroke="rgb(var(--line))" strokeWidth="1.5" />
         {/* transect */}
-        <line x1="70" y1="560" x2="740" y2="72" stroke="rgb(var(--accent))" strokeWidth="1.5" />
+        <line x1="70" y1="560" x2="740" y2="72" stroke="rgb(var(--line))" strokeWidth="1.5" />
         <g fontFamily="var(--font-mono)" fontSize="13" fill="rgb(var(--accent))">
-          <rect x="44" y="560" width="26" height="22" fill="rgb(var(--accent))" />
+          <rect x="44" y="560" width="26" height="22" fill="rgb(var(--accent))" stroke="rgb(var(--line))" />
           <text x="51" y="576" fill="rgb(var(--on-accent))">A</text>
-          <rect x="740" y="52" width="30" height="22" fill="rgb(var(--accent))" />
+          <rect x="740" y="52" width="30" height="22" fill="rgb(var(--accent))" stroke="rgb(var(--line))" />
           <text x="746" y="68" fill="rgb(var(--on-accent))">A′</text>
         </g>
         {/* north arrow */}

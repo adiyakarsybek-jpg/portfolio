@@ -16,7 +16,7 @@ export function Expertise({ onFilter }) {
             const related = featured.filter((p) => p.expertise.includes(e.id));
             return (
               <Reveal as="li" key={e.id} className="grid grid-cols-12 gap-x-4 md:gap-x-6 gap-y-4 border-t border-rule py-8 md:py-10">
-                <span className="col-span-2 md:col-span-1 display text-[calc(var(--ds)*clamp(28px,3vw,44px))] text-accent tabular">{e.no}</span>
+                <span className="col-span-2 md:col-span-1 display text-[calc(var(--ds)*clamp(28px,3vw,44px))] tabular"><span className="num-mark">{e.no}</span></span>
                 <h3 className="col-span-10 md:col-span-5 display-condensed uppercase text-[clamp(28px,3.2vw,48px)] break-words min-w-0">{e.title}</h3>
                 <div className="col-span-12 md:col-span-6 md:pl-6 md:border-l border-rule min-w-0">
                   <p className="text-[17px] text-graphite max-w-[56ch]">{e.text}</p>
@@ -199,13 +199,13 @@ export function About() {
         <div className="mt-16 md:mt-24">
           <p className="label text-mute mb-4">{t('about.transect')}</p>
           <ol className="relative grid grid-cols-1 md:grid-cols-5 gap-y-6 md:gap-x-6">
-            <span aria-hidden="true" className="hidden md:block absolute left-0 right-0 top-[9px] h-px bg-accent" />
-            <span aria-hidden="true" className="md:hidden absolute top-0 bottom-0 left-[8px] w-px bg-accent" />
+            <span aria-hidden="true" className="hidden md:block absolute left-0 right-0 top-[9px] h-px bg-line" />
+            <span aria-hidden="true" className="md:hidden absolute top-0 bottom-0 left-[8px] w-px bg-line" />
             {trajectory.map((s, i) => (
               <li key={i} className="relative pl-8 md:pl-0 md:pt-8 min-w-0">
                 <span
                   aria-hidden="true"
-                  className={`absolute left-0 top-0 w-[18px] h-[18px] border-2 border-accent ${i === trajectory.length - 1 ? 'bg-accent' : 'bg-paper'}`}
+                  className={`absolute left-0 top-0 w-[18px] h-[18px] border-2 border-line ${i === trajectory.length - 1 ? 'bg-accent' : 'bg-paper'}`}
                   style={{ borderRadius: 'var(--mark-radius)' }}
                 />
                 <p className="display-condensed uppercase text-[30px] break-words">{s.place}</p>

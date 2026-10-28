@@ -17,7 +17,7 @@ export function LangSwitch({ className = '' }) {
             aria-label={l.name}
             onClick={() => setLang(l.id)}
             className={`py-1 border-b-2 transition-colors ${
-              lang === l.id ? 'border-accent text-ink' : 'border-transparent text-mute hover:text-ink'
+              lang === l.id ? 'border-line text-ink' : 'border-transparent text-mute hover:text-ink'
             }`}
           >
             {l.label}

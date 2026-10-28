@@ -25,8 +25,8 @@ to English. Image captions in Russian go in `captions: [...]`, in the same order
 
 ## Language and palette switchers
 - **EN / RU** sits in the header. English is the default; the choice is remembered in the browser.
-- **Palette A / B / C / V1** floats in the bottom-right corner (prototype only). A = Electric Pink,
-  B = Dusty Rose, C = Pink & Burgundy, V1 = original cobalt for comparison.
+- **Palette A / B / C / V1** floats in the bottom-right corner (prototype only). A = Electric Lemon,
+  B = Citron & Plum, C = Lemon & Burgundy, V1 = original cobalt for comparison.
 - All colours are tokens in `src/index.css` under `[data-palette='a']` etc.
 - To lock in a final palette: set `DEFAULT_PALETTE` in `src/theme/palettes.js` and remove `<PaletteSwitch />` from `src/App.jsx`.
 

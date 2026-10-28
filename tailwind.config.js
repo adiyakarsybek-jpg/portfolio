@@ -2,7 +2,7 @@
 const tokens = [
   'paper', 'sheet', 'ink', 'graphite', 'mute', 'strong', 'accent', 'accent-ink', 'on-accent',
   'band', 'on-band', 'band-head', 'feature', 'on-feature', 'contact', 'on-contact', 'contact-head',
-  'sel', 'on-sel', 'mark', 'hl',
+  'sel', 'on-sel', 'mark', 'hl', 'line',
 ];
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
