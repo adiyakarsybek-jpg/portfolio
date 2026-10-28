@@ -2,10 +2,8 @@
 name: Deploy Jekyll with GitHub Pages dependencies preinstalled
 
 on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
-
+  # Automatic run on push is off: it published the unbuilt source over the
+  # Vite build from deploy.yml and left the site blank. Run manually if needed.
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
