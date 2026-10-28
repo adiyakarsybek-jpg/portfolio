@@ -1,0 +1,356 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Layout concept: the site is set like a drawing set — a 12-column sheet with
+   faint column rules, title-block metadata, and one accent "markup" colour
+   used only where the eye should land.
+
+   COLOUR TOKENS are RGB triplets ("r g b") so Tailwind can apply opacity
+   (e.g. text-on-band/60). Each palette below redefines the same tokens.
+   paper/sheet/ink/graphite/mute — base surfaces and text
+   accent        graphic accent (numbers, map, strokes, large type)
+   accent-ink    accent used as small text on paper (contrast-safe)
+   band          Initiatives section; feature = first initiative panel
+   contact       Contact section; sel = selected filter / active control
+   mark          hero study-area fill; hl = highlighter behind type      */
+
+:root,
+[data-palette='a'] {
+  /* Theme A — Electric Pink: bold, confident, experimental */
+  --paper: 245 242 236;
+  --sheet: 251 249 245;
+  --ink: 22 22 22;
+  --graphite: 58 58 58;
+  --mute: 104 104 104;
+  --rule: rgb(22 22 22 / 0.16);
+  --rule-faint: rgb(22 22 22 / 0.06);
+  --strong: 22 22 22;
+  --accent: 245 0 135;
+  --accent-ink: 196 0 108;
+  --on-accent: 22 22 22;
+  --band: 22 22 22;
+  --on-band: 245 242 236;
+  --band-head: 245 0 135;
+  --feature: 245 0 135;
+  --on-feature: 22 22 22;
+  --contact: 245 0 135;
+  --on-contact: 22 22 22;
+  --contact-head: 22 22 22;
+  --sel: 245 0 135;
+  --on-sel: 22 22 22;
+  --mark: 245 0 135;
+  --mark-op: 0.22;
+  --hl: 245 0 135;
+  --map-block: 22 22 22;
+  --title: 22 22 22;
+  --display-weight: 820;
+  --chip-radius: 0px;
+  --mark-radius: 0px;
+}
+
+[data-palette='b'] {
+  /* Theme B — Dusty Rose: refined, understated, intellectual */
+  --paper: 248 243 240;
+  --sheet: 253 250 248;
+  --ink: 72 45 57;
+  --graphite: 94 70 81;
+  --mute: 115 92 102;
+  --rule: rgb(72 45 57 / 0.16);
+  --rule-faint: rgb(72 45 57 / 0.055);
+  --strong: 72 45 57;
+  --accent: 198 106 134;
+  --accent-ink: 154 68 98;
+  --on-accent: 248 243 240;
+  --band: 185 170 168;
+  --on-band: 72 45 57;
+  --band-head: 72 45 57;
+  --feature: 72 45 57;
+  --on-feature: 248 243 240;
+  --contact: 72 45 57;
+  --on-contact: 248 243 240;
+  --contact-head: 198 106 134;
+  --sel: 72 45 57;
+  --on-sel: 248 243 240;
+  --mark: 198 106 134;
+  --mark-op: 0.28;
+  --hl: 198 106 134;
+  --map-block: 72 45 57;
+  --title: 72 45 57;
+  --display-weight: 640;
+  --chip-radius: 999px;
+  --mark-radius: 999px;
+}
+
+[data-palette='c'] {
+  /* Theme C — Pink & Burgundy: editorial, artistic, contemporary */
+  --paper: 250 245 237;
+  --sheet: 255 251 245;
+  --ink: 36 32 33;
+  --graphite: 74 68 70;
+  --mute: 108 100 102;
+  --rule: rgb(36 32 33 / 0.15);
+  --rule-faint: rgb(101 13 50 / 0.06);
+  --strong: 101 13 50;
+  --accent: 101 13 50;
+  --accent-ink: 101 13 50;
+  --on-accent: 255 181 210;
+  --band: 101 13 50;
+  --on-band: 250 245 237;
+  --band-head: 255 181 210;
+  --feature: 255 181 210;
+  --on-feature: 101 13 50;
+  --contact: 255 181 210;
+  --on-contact: 101 13 50;
+  --contact-head: 101 13 50;
+  --sel: 101 13 50;
+  --on-sel: 255 181 210;
+  --mark: 255 181 210;
+  --mark-op: 0.85;
+  --hl: 255 181 210;
+  --map-block: 36 32 33;
+  --title: 101 13 50;
+  --display-weight: 800;
+  --chip-radius: 0px;
+  --mark-radius: 0px;
+}
+
+[data-palette='v1'] {
+  /* Version 1 — cobalt, kept for comparison */
+  --paper: 237 237 232;
+  --sheet: 246 246 242;
+  --ink: 17 18 20;
+  --graphite: 59 61 66;
+  --mute: 111 113 118;
+  --rule: rgb(17 18 20 / 0.14);
+  --rule-faint: rgb(17 18 20 / 0.055);
+  --strong: 17 18 20;
+  --accent: 42 60 245;
+  --accent-ink: 27 40 184;
+  --on-accent: 237 237 232;
+  --band: 17 18 20;
+  --on-band: 237 237 232;
+  --band-head: 237 237 232;
+  --feature: 42 60 245;
+  --on-feature: 237 237 232;
+  --contact: 42 60 245;
+  --on-contact: 237 237 232;
+  --contact-head: 237 237 232;
+  --sel: 17 18 20;
+  --on-sel: 237 237 232;
+  --mark: 42 60 245;
+  --mark-op: 0.16;
+  --hl: 42 60 245;
+  --map-block: 17 18 20;
+  --title: 17 18 20;
+  --display-weight: 800;
+  --chip-radius: 0px;
+  --mark-radius: 0px;
+}
+
+/* TYPE — English: Archivo (wide + condensed). Russian: Unbounded (wide),
+   Roboto Flex (condensed), Onest (body). IBM Plex Mono covers both. */
+:root {
+  --font-display: 'Archivo Variable', 'Unbounded Variable', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+  --font-cond: 'Archivo Variable', 'Roboto Flex Variable', 'Arial Narrow', Arial, sans-serif;
+  --font-body: 'Instrument Sans Variable', 'Onest Variable', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --disp-wdth: 125;
+  --cond-wdth: 70;
+  --disp-track: -0.035em;
+  --ds: 1; /* display size scale */
+  color-scheme: light;
+}
+html[lang='ru'] {
+  --font-display: 'Unbounded Variable', 'Archivo Variable', 'Arial Black', Arial, sans-serif;
+  --font-cond: 'Roboto Flex Variable', 'Arial Narrow', Arial, sans-serif;
+  --font-body: 'Onest Variable', 'Instrument Sans Variable', 'Helvetica Neue', Arial, sans-serif;
+  --disp-wdth: 100;
+  --cond-wdth: 30;
+  --disp-track: -0.03em;
+  --ds: 0.8;
+}
+html[lang='ru'] h1,
+html[lang='ru'] h2,
+html[lang='ru'] h3 { hyphens: auto; -webkit-hyphens: auto; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  background: rgb(var(--paper));
+  color: rgb(var(--ink));
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 60;
+  background: rgb(var(--paper));
+}
+
+::selection { background: rgb(var(--accent)); color: rgb(var(--on-accent)); }
+
+h1, h2, h3, h4 { text-wrap: balance; }
+p { text-wrap: pretty; }
+
+/* Side gutter — used on every band's inner wrapper */
+.gutter {
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+@media (min-width: 768px) {
+  .gutter {
+    padding-left: max(32px, env(safe-area-inset-left, 0px));
+    padding-right: max(32px, env(safe-area-inset-right, 0px));
+  }
+}
+@media (min-width: 1280px) {
+  .gutter {
+    padding-left: max(48px, env(safe-area-inset-left, 0px));
+    padding-right: max(48px, env(safe-area-inset-right, 0px));
+  }
+}
+
+/* Faint 12-column rules behind the sheet */
+.column-rules {
+  background-image: repeating-linear-gradient(to right, var(--rule-faint) 0 1px, transparent 1px calc(100% / 12));
+}
+
+/* Type */
+.display {
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' var(--disp-wdth);
+  font-weight: var(--display-weight);
+  letter-spacing: var(--disp-track);
+  line-height: 0.88;
+}
+html[lang='ru'] .display { font-weight: min(var(--display-weight), 720); line-height: 0.95; }
+.display-condensed {
+  font-family: var(--font-cond);
+  font-variation-settings: 'wdth' var(--cond-wdth);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+}
+.section-title { color: rgb(var(--title)); }
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* Small square/dot after the name and section titles — shape set per palette */
+.mark-dot {
+  display: inline-block;
+  width: 0.14em;
+  height: 0.14em;
+  margin-left: 0.06em;
+  background: rgb(var(--accent));
+  border-radius: var(--mark-radius);
+  vertical-align: baseline;
+}
+[data-palette='c'] .mark-dot { background: rgb(var(--hl)); outline: 0.02em solid rgb(var(--accent)); }
+[data-palette='v1'] .mark-dot { display: none; }
+
+/* Highlighted role line in the hero */
+.role-accent { color: rgb(var(--accent)); }
+[data-palette='b'] .role-accent { color: rgb(var(--accent-ink)); }
+[data-palette='c'] .role-accent {
+  color: rgb(var(--accent));
+  background: linear-gradient(transparent 12%, rgb(var(--hl)) 12%, rgb(var(--hl)) 92%, transparent 92%);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 0 0.08em;
+}
+
+/* Chips and buttons */
+.chip { border-radius: var(--chip-radius); }
+
+/* Editorial placeholder for unconfirmed content */
+.tbc {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  color: rgb(var(--accent-ink));
+  background: rgb(var(--accent) / 0.08);
+  border-bottom: 1px dashed rgb(var(--accent-ink));
+  padding: 0 0.2em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.inverse .tbc {
+  color: inherit;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  border-bottom-color: currentColor;
+}
+
+/* Links */
+.ulink {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s ease, color 0.2s ease;
+}
+.ulink:hover { color: rgb(var(--accent-ink)); }
+[data-palette='a'] .ulink:hover { background-size: 100% 3px; }
+[data-palette='c'] .ulink:hover { background-color: rgb(var(--hl)); color: rgb(var(--accent)); }
+
+:focus-visible {
+  outline: 2px solid rgb(var(--accent-ink));
+  outline-offset: 3px;
+}
+
+/* Project cards — selected / hover highlight differs per palette */
+.plate { transition: outline-color 0.25s ease, box-shadow 0.25s ease; }
+.plate img {
+  filter: saturate(0.82) contrast(1.02);
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.4s ease;
+}
+.group:hover .plate img,
+.group:focus-visible .plate img {
+  filter: saturate(1) contrast(1);
+  transform: scale(1.025);
+}
+.card-title { transition: color 0.2s ease, background-color 0.2s ease; }
+.group:hover .card-title { color: rgb(var(--accent-ink)); }
+[data-palette='a'] .group:hover .plate { box-shadow: 0 0 0 4px rgb(var(--accent)); }
+[data-palette='b'] .group:hover .plate { box-shadow: 0 0 0 1px rgb(var(--accent)); }
+[data-palette='c'] .group:hover .plate { box-shadow: 0 0 0 2px rgb(var(--accent)); }
+[data-palette='c'] .group:hover .card-title {
+  color: rgb(var(--accent));
+  background: rgb(var(--hl));
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Scroll reveal: content is always visible; it only settles into place. */
+.reveal { transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.reveal.pending { transform: translateY(18px); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal.pending { transform: none; transition: none; }
+  .plate img { transition: none; }
+  .group:hover .plate img { transform: none; }
+  body { transition: none; }
+}
+
+/* Hero map drawing */
+.map-draw { stroke-dasharray: 2400; stroke-dashoffset: 0; animation: draw 2.4s cubic-bezier(0.3, 0.6, 0.2, 1) both; }
+@keyframes draw { from { stroke-dashoffset: 2400; } to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .map-draw { animation: none; } }
+
+/* Case-study view entrance */
+.view-enter { animation: viewIn 0.5s ease both; }
+@keyframes viewIn { from { transform: translateY(10px); } to { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .view-enter { animation: none; } }
