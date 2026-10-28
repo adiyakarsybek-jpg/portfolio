@@ -43,15 +43,17 @@ export const useLang = () => useContext(LangContext);
 /* ---- Merge Russian text over the English data (missing fields fall back to English) ---- */
 const mergeList = (base, over) => base.map((b, i) => ({ ...b, ...(over?.[i] || {}) }));
 
+const ruTitles = (list = []) => list.map((x) => ({ ...x, title: x.titleRu || x.title }));
+
 function localizeProject(p, lang) {
   if (lang !== 'ru') return p;
-  const o = projectsRu[p.slug];
-  if (!o) return p;
-  const { captions, ...rest } = o;
+  const { captions, ...rest } = projectsRu[p.slug] || {};
   return {
     ...p,
     ...rest,
     gallery: p.gallery.map((g, i) => ({ ...g, caption: captions?.[i] ?? g.caption })),
+    docs: ruTitles(p.docs),
+    links: ruTitles(p.links),
   };
 }
 
@@ -65,7 +67,8 @@ function buildContent(lang) {
     trajectory: isRu ? mergeList(en.trajectory, ru.trajectoryRu) : en.trajectory,
     education: isRu ? mergeList(en.education, ru.educationRu) : en.education,
     recognition: isRu ? mergeList(en.recognition, ru.recognitionRu) : en.recognition,
-    speaking: isRu ? mergeList(en.speaking, ru.speakingRu) : en.speaking,
+    teaching: isRu ? mergeList(en.teaching, ru.teachingRu) : en.teaching,
+    media: isRu ? en.media.map((g) => ({ ...g, title: g.titleRu || g.title, items: ruTitles(g.items) })) : en.media,
     expertise: isRu ? expertiseEn.map((e) => ({ ...e, ...(ru.expertiseRu[e.id] || {}) })) : expertiseEn,
     initiatives: isRu ? initiativesEn.map((i) => ({ ...i, ...(ru.initiativesRu[i.name] || {}) })) : initiativesEn,
     projects,

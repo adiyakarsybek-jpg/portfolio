@@ -1,9 +1,8 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { Header, Hero } from './components/Hero.jsx';
 import { Work } from './components/Work.jsx';
-import { About, Contact, Expertise, Footer, Initiatives } from './components/Sections.jsx';
+import { About, Contact, Expertise, Footer, Initiatives, Media } from './components/Sections.jsx';
 import { CaseStudy } from './components/CaseStudy.jsx';
-import { PaletteSwitch } from './components/Controls.jsx';
 import { useLang } from './i18n/index.jsx';
 
 /* Hash routing (works on any static host, no server config):
@@ -62,11 +61,11 @@ export default function App() {
           <Expertise onFilter={filterAndScroll} />
           <Initiatives />
           <About />
+          <Media />
         </main>
       )}
       <Contact />
       <Footer />
-      <PaletteSwitch />
     </>
   );
 }

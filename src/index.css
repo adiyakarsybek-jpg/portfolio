@@ -7,7 +7,7 @@
    used only where the eye should land.
 
    COLOUR TOKENS are RGB triplets ("r g b") so Tailwind can apply opacity
-   (e.g. text-on-band/60). Each palette below redefines the same tokens.
+   (e.g. text-on-band/60). Change a colour here and it updates everywhere.
    paper/sheet/ink/graphite/mute — base surfaces and text
    accent        accent fill (highlights, panels, map area, markers)
    line          thin lines and outlines drawn over paper
@@ -16,9 +16,8 @@
    contact       Contact section; sel = selected filter / active control
    mark          hero study-area fill; hl = highlighter behind type      */
 
-:root,
-[data-palette='a'] {
-  /* Theme A — Electric Lemon: bold, confident, experimental */
+:root {
+  /* Electric Pink: bold, confident, experimental */
   --paper: 245 242 236;
   --sheet: 251 249 245;
   --ink: 22 22 22;
@@ -27,128 +26,26 @@
   --rule: rgb(22 22 22 / 0.16);
   --rule-faint: rgb(22 22 22 / 0.06);
   --strong: 22 22 22;
-  --accent: 255 235 0;
-  --accent-ink: 102 92 0;
+  --accent: 245 0 135;
+  --accent-ink: 196 0 108;
   --on-accent: 22 22 22;
-  --line: 22 22 22;
+  --line: 245 0 135;
   --band: 22 22 22;
   --on-band: 245 242 236;
-  --band-head: 255 235 0;
-  --feature: 255 235 0;
+  --band-head: 245 0 135;
+  --feature: 245 0 135;
   --on-feature: 22 22 22;
-  --contact: 255 235 0;
+  --contact: 245 0 135;
   --on-contact: 22 22 22;
   --contact-head: 22 22 22;
-  --sel: 255 235 0;
+  --sel: 245 0 135;
   --on-sel: 22 22 22;
-  --mark: 255 235 0;
-  --mark-op: 0.8;
-  --hl: 255 235 0;
+  --mark: 245 0 135;
+  --mark-op: 0.22;
+  --hl: 245 0 135;
   --map-block: 22 22 22;
   --title: 22 22 22;
   --display-weight: 820;
-  --chip-radius: 0px;
-  --mark-radius: 0px;
-}
-
-[data-palette='b'] {
-  /* Theme B — Citron & Plum: refined, understated, intellectual */
-  --paper: 248 243 240;
-  --sheet: 253 250 248;
-  --ink: 72 45 57;
-  --graphite: 94 70 81;
-  --mute: 115 92 102;
-  --rule: rgb(72 45 57 / 0.16);
-  --rule-faint: rgb(72 45 57 / 0.055);
-  --strong: 72 45 57;
-  --accent: 220 203 69;
-  --accent-ink: 104 92 22;
-  --on-accent: 72 45 57;
-  --line: 72 45 57;
-  --band: 185 170 168;
-  --on-band: 72 45 57;
-  --band-head: 72 45 57;
-  --feature: 72 45 57;
-  --on-feature: 248 243 240;
-  --contact: 72 45 57;
-  --on-contact: 248 243 240;
-  --contact-head: 220 203 69;
-  --sel: 72 45 57;
-  --on-sel: 248 243 240;
-  --mark: 220 203 69;
-  --mark-op: 0.75;
-  --hl: 232 220 120;
-  --map-block: 72 45 57;
-  --title: 72 45 57;
-  --display-weight: 640;
-  --chip-radius: 999px;
-  --mark-radius: 999px;
-}
-
-[data-palette='c'] {
-  /* Theme C — Lemon & Burgundy: editorial, artistic, contemporary */
-  --paper: 250 245 237;
-  --sheet: 255 251 245;
-  --ink: 36 32 33;
-  --graphite: 74 68 70;
-  --mute: 108 100 102;
-  --rule: rgb(36 32 33 / 0.15);
-  --rule-faint: rgb(101 13 50 / 0.06);
-  --strong: 101 13 50;
-  --accent: 101 13 50;
-  --accent-ink: 101 13 50;
-  --on-accent: 255 240 122;
-  --line: 101 13 50;
-  --band: 101 13 50;
-  --on-band: 250 245 237;
-  --band-head: 255 240 122;
-  --feature: 255 240 122;
-  --on-feature: 101 13 50;
-  --contact: 255 240 122;
-  --on-contact: 101 13 50;
-  --contact-head: 101 13 50;
-  --sel: 101 13 50;
-  --on-sel: 255 240 122;
-  --mark: 255 240 122;
-  --mark-op: 0.9;
-  --hl: 255 240 122;
-  --map-block: 36 32 33;
-  --title: 101 13 50;
-  --display-weight: 800;
-  --chip-radius: 0px;
-  --mark-radius: 0px;
-}
-
-[data-palette='v1'] {
-  /* Version 1 — cobalt, kept for comparison */
-  --paper: 237 237 232;
-  --sheet: 246 246 242;
-  --ink: 17 18 20;
-  --graphite: 59 61 66;
-  --mute: 111 113 118;
-  --rule: rgb(17 18 20 / 0.14);
-  --rule-faint: rgb(17 18 20 / 0.055);
-  --strong: 17 18 20;
-  --accent: 42 60 245;
-  --accent-ink: 27 40 184;
-  --on-accent: 237 237 232;
-  --line: 42 60 245;
-  --band: 17 18 20;
-  --on-band: 237 237 232;
-  --band-head: 237 237 232;
-  --feature: 42 60 245;
-  --on-feature: 237 237 232;
-  --contact: 42 60 245;
-  --on-contact: 237 237 232;
-  --contact-head: 237 237 232;
-  --sel: 17 18 20;
-  --on-sel: 237 237 232;
-  --mark: 42 60 245;
-  --mark-op: 0.16;
-  --hl: 42 60 245;
-  --map-block: 17 18 20;
-  --title: 17 18 20;
-  --display-weight: 800;
   --chip-radius: 0px;
   --mark-radius: 0px;
 }
@@ -202,7 +99,7 @@ body::before {
   background: rgb(var(--paper));
 }
 
-::selection { background: rgb(var(--hl)); color: rgb(var(--ink)); }
+::selection { background: rgb(var(--accent)); color: rgb(var(--on-accent)); }
 
 h1, h2, h3, h4 { text-wrap: balance; }
 p { text-wrap: pretty; }
@@ -262,26 +159,14 @@ html[lang='ru'] .display { font-weight: min(var(--display-weight), 720); line-he
   width: 0.14em;
   height: 0.14em;
   margin-left: 0.06em;
-  background: rgb(var(--hl));
-  outline: 0.02em solid rgb(var(--line));
+  background: rgb(var(--accent));
   border-radius: var(--mark-radius);
   vertical-align: baseline;
 }
-[data-palette='v1'] .mark-dot { display: none; }
 
-/* Highlighted role line in the hero: a marker stroke behind the type */
+/* Accent lines of type: the hero role line and expertise numbers */
 .role-accent,
-.num-mark {
-  color: rgb(var(--ink));
-  background: linear-gradient(transparent 10%, rgb(var(--hl)) 10%, rgb(var(--hl)) 92%, transparent 92%);
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-  padding: 0 0.08em;
-}
-[data-palette='c'] .role-accent,
-[data-palette='c'] .num-mark { color: rgb(var(--accent)); }
-[data-palette='v1'] .role-accent,
-[data-palette='v1'] .num-mark { background: none; padding: 0; color: rgb(var(--accent)); }
+.num-mark { color: rgb(var(--accent)); }
 
 /* Chips and buttons */
 .chip { border-radius: var(--chip-radius); }
@@ -312,17 +197,14 @@ html[lang='ru'] .display { font-weight: min(var(--display-weight), 720); line-he
   transition: background-size 0.3s ease, color 0.2s ease;
 }
 .ulink:hover { color: rgb(var(--accent-ink)); }
-[data-palette='a'] .ulink:hover,
-[data-palette='b'] .ulink:hover,
-[data-palette='c'] .ulink:hover { background-color: rgb(var(--hl)); color: rgb(var(--ink)); }
-[data-palette='c'] .ulink:hover { color: rgb(var(--accent)); }
+.ulink:hover { background-size: 100% 3px; }
 
 :focus-visible {
   outline: 2px solid rgb(var(--accent-ink));
   outline-offset: 3px;
 }
 
-/* Project cards — selected / hover highlight differs per palette */
+/* Project cards — hover highlight */
 .plate { transition: outline-color 0.25s ease, box-shadow 0.25s ease; }
 .plate img {
   filter: saturate(0.82) contrast(1.02);
@@ -334,18 +216,8 @@ html[lang='ru'] .display { font-weight: min(var(--display-weight), 720); line-he
   transform: scale(1.025);
 }
 .card-title { transition: color 0.2s ease, background-color 0.2s ease; }
-.group:hover .card-title {
-  color: rgb(var(--ink));
-  background: rgb(var(--hl));
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-}
-[data-palette='c'] .group:hover .card-title { color: rgb(var(--accent)); }
-[data-palette='v1'] .group:hover .card-title { background: none; color: rgb(var(--accent-ink)); }
-.group:hover .plate { box-shadow: 0 0 0 2px rgb(var(--line)), 0 0 0 7px rgb(var(--accent)); }
-[data-palette='b'] .group:hover .plate { box-shadow: 0 0 0 1px rgb(var(--line)), 0 0 0 5px rgb(var(--accent)); }
-[data-palette='c'] .group:hover .plate { box-shadow: 0 0 0 2px rgb(var(--line)), 0 0 0 7px rgb(var(--hl)); }
-[data-palette='v1'] .group:hover .plate { box-shadow: 0 0 0 2px rgb(var(--accent)); }
+.group:hover .card-title { color: rgb(var(--accent-ink)); }
+.group:hover .plate { box-shadow: 0 0 0 4px rgb(var(--accent)); }
 
 /* Scroll reveal: content is always visible; it only settles into place. */
 .reveal { transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); }
@@ -366,4 +238,6 @@ html[lang='ru'] .display { font-weight: min(var(--display-weight), 720); line-he
 .view-enter { animation: viewIn 0.5s ease both; }
 @keyframes viewIn { from { transform: translateY(10px); } to { transform: none; } }
 @media (prefers-reduced-motion: reduce) { .view-enter { animation: none; } }
-[data-palette='v1'] ::selection { color: rgb(var(--paper)); }
+
+/* Elements toggled with the hidden attribute stay hidden even with layout classes */
+[hidden] { display: none !important; }

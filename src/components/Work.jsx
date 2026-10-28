@@ -1,6 +1,6 @@
 import { useContent, useLang } from '../i18n/index.jsx';
-import { img } from '../lib/images.js';
-import { Arrow, PlaceholderArt, Reveal, SectionHead, StatusChip, T } from './primitives.jsx';
+import { ProjectArt } from './ProjectArt.jsx';
+import { Arrow, Reveal, SectionHead, StatusChip, T } from './primitives.jsx';
 
 const pad = (n) => String(n).padStart(2, '0');
 
@@ -17,20 +17,9 @@ const LAYOUT = [
 ];
 
 export function Cover({ project, className = '' }) {
-  const first = project.gallery?.[0];
-  const src = first ? img(first.src) : null;
   return (
-    <div className={`plate relative overflow-hidden bg-sheet border border-rule ${className}`}>
-      {src ? (
-        <img
-          src={src}
-          alt={first.caption || project.title}
-          loading="lazy"
-          className={`absolute inset-0 w-full h-full ${first.fit === 'contain' ? 'object-contain p-3 md:p-5' : 'object-cover'}`}
-        />
-      ) : (
-        <PlaceholderArt seed={project.slug} motif={project.placeholder} slug={project.slug} />
-      )}
+    <div className={`plate relative overflow-hidden border border-rule ${className}`}>
+      <ProjectArt project={project} className="absolute inset-0" />
     </div>
   );
 }

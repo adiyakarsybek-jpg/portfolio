@@ -1,4 +1,4 @@
-# Adiya Karsybek — Portfolio (Prototype V2)
+# Adiya Karsybek — Portfolio
 
 React 18 + Vite + Tailwind CSS. No backend, CMS or API keys. Fonts are self-hosted.
 
@@ -23,12 +23,23 @@ The English files hold the structure (images, status, links, order). The Russian
 matched by project `slug` (or expertise `id` / initiative `name`). Any Russian field that is missing falls back
 to English. Image captions in Russian go in `captions: [...]`, in the same order as the gallery.
 
-## Language and palette switchers
-- **EN / RU** sits in the header. English is the default; the choice is remembered in the browser.
-- **Palette A / B / C / V1** floats in the bottom-right corner (prototype only). A = Electric Lemon,
-  B = Citron & Plum, C = Lemon & Burgundy, V1 = original cobalt for comparison.
-- All colours are tokens in `src/index.css` under `[data-palette='a']` etc.
-- To lock in a final palette: set `DEFAULT_PALETTE` in `src/theme/palettes.js` and remove `<PaletteSwitch />` from `src/App.jsx`.
+## Language
+**EN / RU** sits in the header. English is the default; the choice is remembered in the browser.
+
+## Colours
+One palette (Electric Pink). All colours are tokens at the top of `src/index.css`.
+
+## Documents, CV, photos
+- CV files: `public/docs/cv/` — the expandable CV text is in `src/data/cv.js`.
+- Diploma and award certificates: `public/docs/awards/`.
+- Project PDFs: `public/docs/projects/`, listed per project in `docs` in `src/data/projects.js`.
+- Portrait: `src/assets/about/portrait.jpg`.
+- Project covers are generated drawings (`src/components/ProjectArt.jsx`); choose one per project with `art`.
+- Publications, interviews and talks: `media` in `src/data/site.js`.
+
+## Workflow
+Changes go to a separate branch first and are merged into `main` only after approval.
+Every push to `main` rebuilds and publishes the site (`.github/workflows/deploy.yml`).
 
 ## Fonts
 English: Archivo (display, wide and condensed) + Instrument Sans (body).

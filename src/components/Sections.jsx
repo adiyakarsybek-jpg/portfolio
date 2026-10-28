@@ -1,4 +1,7 @@
+import { useState } from 'react';
 import { useContent, useLang } from '../i18n/index.jsx';
+import { cv } from '../data/cv.js';
+import portrait from '../assets/about/portrait.jpg';
 import { Arrow, PlaceholderArt, Reveal, SectionHead, T } from './primitives.jsx';
 
 const sheetNo = (lang, n) => `${lang === 'ru' ? 'А' : 'A'}-${n}`;
@@ -96,15 +99,16 @@ export function Initiatives() {
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-auto pt-8">
-                    {it.project ? (
+                  <div className="mt-auto pt-8 flex flex-wrap items-center gap-x-5 gap-y-2">
+                    {it.links?.map((l) => (
+                      <a key={l.url} href={l.url} target="_blank" rel="noreferrer" className="label inline-flex items-center gap-1.5 border-b border-current pb-0.5 hover:opacity-75">
+                        {l.label} <span aria-hidden="true">↗</span>
+                      </a>
+                    ))}
+                    {it.project && (
                       <a href={`#project-${it.project}`} className="label inline-flex items-center gap-2 hover:underline underline-offset-4">
                         {t('initiatives.related')} <Arrow />
                       </a>
-                    ) : (
-                      <span className="label opacity-80">
-                        <T>{t('initiatives.nolink')}</T>
-                      </span>
                     )}
                   </div>
                 </div>
@@ -136,6 +140,20 @@ function ListBlock({ title, items }) {
                 <T>{it.note}</T>
               </p>
             )}
+            {(it.doc || it.link) && (
+              <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2">
+                {it.doc && (
+                  <a href={it.doc.file} target="_blank" rel="noreferrer" download className="label text-accent-ink border-b border-current pb-0.5 hover:text-ink">
+                    {it.doc.title} ↓
+                  </a>
+                )}
+                {it.link && (
+                  <a href={it.link.url} target="_blank" rel="noreferrer" className="label text-accent-ink border-b border-current pb-0.5 hover:text-ink">
+                    {it.link.title} ↗
+                  </a>
+                )}
+              </div>
+            )}
           </li>
         ))}
       </ul>
@@ -143,43 +161,110 @@ function ListBlock({ title, items }) {
   );
 }
 
+/* One expandable CV (EN or RU) with its download links */
+function CvPanel({ data, lang }) {
+  const [open, setOpen] = useState(false);
+  const id = `cv-${lang}`;
+  return (
+    <div className="border-t border-strong" lang={lang}>
+      <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 py-4">
+        <button
+          type="button"
+          aria-expanded={open}
+          aria-controls={id}
+          onClick={() => setOpen((v) => !v)}
+          className="group flex items-center gap-3 text-left"
+        >
+          <span aria-hidden="true" className={`w-8 h-8 shrink-0 inline-flex items-center justify-center border border-strong text-[18px] leading-none transition-colors ${open ? 'bg-accent border-accent text-on-accent' : 'group-hover:bg-sheet'}`}>
+            {open ? '−' : '+'}
+          </span>
+          <span className="display-condensed uppercase text-[clamp(24px,2.6vw,34px)] card-title">{data.label}</span>
+        </button>
+        <div className="flex flex-wrap gap-2">
+          {data.files.map((f) => (
+            <a key={f.file} href={f.file} download target="_blank" rel="noreferrer" className="chip label border border-strong px-3 py-2 hover:bg-sel hover:text-on-sel hover:border-sel transition-colors">
+              {f.title} ↓
+            </a>
+          ))}
+        </div>
+      </div>
+      <div id={id} hidden={!open} className="pb-10">
+        <p className="label text-accent-ink">{data.headline}</p>
+        <div className="grid grid-cols-12 gap-x-4 md:gap-x-6 gap-y-8 mt-6">
+          <div className="col-span-12 lg:col-span-4 min-w-0">
+            <h4 className="label text-mute border-b border-strong pb-2">{data.profileTitle}</h4>
+            <p className="text-[15px] text-graphite mt-3">{data.profile}</p>
+            <h4 className="label text-mute border-b border-strong pb-2 mt-8">{data.expertiseTitle}</h4>
+            <ul className="flex flex-wrap gap-1.5 mt-3">
+              {data.expertise.map((e) => (
+                <li key={e} className="chip label border border-rule px-2 py-1 text-graphite">{e}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="col-span-12 lg:col-span-8 min-w-0">
+            <h4 className="label text-mute border-b border-strong pb-2">{data.experienceTitle}</h4>
+            <ol>
+              {data.experience.map((x, i) => (
+                <li key={i} className="grid grid-cols-1 sm:grid-cols-[10rem_1fr] gap-x-6 gap-y-1 py-4 border-b border-rule">
+                  <span className="label text-mute tabular pt-1">{x.period}</span>
+                  <div className="min-w-0">
+                    <p className="text-[17px] font-medium leading-snug">{x.role}</p>
+                    <p className="text-[14px] text-accent-ink mt-0.5">
+                      {x.org}
+                      {x.place ? ` · ${x.place}` : ''}
+                    </p>
+                    <ul className="mt-2 space-y-1.5">
+                      {x.points.map((pt, k) => (
+                        <li key={k} className="text-[14px] text-graphite pl-4 relative before:content-['–'] before:absolute before:left-0">{pt}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <h4 className="label text-mute border-b border-strong pb-2 mt-8">{data.educationTitle}</h4>
+            <ul>
+              {data.education.map((e, i) => (
+                <li key={i} className="grid grid-cols-1 sm:grid-cols-[10rem_1fr] gap-x-6 gap-y-1 py-4 border-b border-rule">
+                  <span className="label text-mute tabular pt-1">{e.period}</span>
+                  <div>
+                    <p className="text-[16px] font-medium">{e.title}</p>
+                    <p className="text-[14px] text-accent-ink mt-0.5">{e.org}</p>
+                    {e.note && <p className="text-[14px] text-graphite mt-1.5">{e.note}</p>}
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <h4 className="label text-mute border-b border-strong pb-2 mt-8">{data.moreTitle}</h4>
+            <ul className="mt-2 space-y-2">
+              {data.more.map((m, k) => (
+                <li key={k} className="text-[14px] text-graphite pl-4 relative before:content-['–'] before:absolute before:left-0">{m}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function About() {
   const { t } = useLang();
-  const { bio, contact, trajectory, education, recognition, speaking } = useContent();
+  const { bio, site, trajectory, education, recognition, teaching } = useContent();
   return (
     <section aria-labelledby="about" className="column-rules">
       <div className="gutter mx-auto max-w-sheet py-16 md:py-28">
         <SectionHead sheet="A-04" id="about" title={t('about.title')} aside={t('about.aside')} />
 
         <div className="grid grid-cols-12 gap-x-4 md:gap-x-6 gap-y-10">
-          <div className="col-span-12 sm:col-span-6 lg:col-span-4">
+          <figure className="col-span-12 sm:col-span-6 lg:col-span-4">
             <div className="aspect-[4/5] w-full max-w-full border border-strong bg-sheet relative overflow-hidden">
-              {/* PLACEHOLDER: replace with a professional portrait (import an image and use <img>) */}
-              <svg viewBox="0 0 400 500" className="absolute inset-0 w-full h-full" aria-hidden="true">
-                <line x1="0" y1="0" x2="400" y2="500" stroke="var(--rule)" />
-                <line x1="400" y1="0" x2="0" y2="500" stroke="var(--rule)" />
-                <circle cx="200" cy="200" r="70" fill="none" stroke="rgb(var(--ink))" strokeOpacity="0.35" />
-                <path d="M80 500 C 90 340, 310 340, 320 500" fill="none" stroke="rgb(var(--ink))" strokeOpacity="0.35" />
-              </svg>
-              <span className="absolute left-2 bottom-2 label bg-paper/90 text-accent-ink px-1.5 py-0.5 border border-dashed border-accent-ink">
-                {t('about.portrait')}
-              </span>
+              {/* Portrait — replace src/assets/about/portrait.jpg to change it */}
+              <img src={portrait} alt={site.name} className="absolute inset-0 w-full h-full object-cover object-top" />
+              <span aria-hidden="true" className="absolute left-0 bottom-0 w-12 h-12 bg-accent" />
             </div>
-            <div className="mt-4 flex flex-col gap-2">
-              {contact.cvUrl ? (
-                <a
-                  href={contact.cvUrl}
-                  className="chip label inline-flex items-center justify-between border border-strong px-4 py-3 hover:bg-sel hover:text-on-sel transition-colors"
-                >
-                  {t('about.cv')} <Arrow />
-                </a>
-              ) : (
-                <span className="chip label inline-flex items-center justify-between gap-3 border border-dashed border-accent-ink text-accent-ink px-4 py-3" aria-disabled="true">
-                  {t('about.cv.missing')} <span aria-hidden="true">PDF</span>
-                </span>
-              )}
-            </div>
-          </div>
+            <figcaption className="label text-mute mt-2">{site.name} · {site.base}</figcaption>
+          </figure>
 
           <div className="col-span-12 lg:col-span-8 lg:pl-6 min-w-0">
             <Reveal>
@@ -187,7 +272,7 @@ export function About() {
             </Reveal>
             <div className="mt-8 grid md:grid-cols-2 gap-x-8 gap-y-5 text-[17px] text-graphite">
               {bio.paragraphs.map((p, i) => (
-                <p key={i} className={i === 0 ? 'md:col-span-2 max-w-[62ch]' : ''}>
+                <p key={i} className={i === 0 ? 'md:col-span-2 max-w-[66ch]' : ''}>
                   {p}
                 </p>
               ))}
@@ -219,7 +304,56 @@ export function About() {
         <div className="mt-16 md:mt-24 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6">
           <ListBlock title={t('about.education')} items={education} />
           <ListBlock title={t('about.recognition')} items={recognition} />
-          <ListBlock title={t('about.speaking')} items={speaking} />
+          <ListBlock title={t('about.teaching')} items={teaching} />
+        </div>
+
+        {/* CV — expandable, in both languages, with downloads */}
+        <div className="mt-16 md:mt-24" aria-labelledby="cv-title">
+          <h3 id="cv-title" className="label text-mute mb-3">{t('about.cv.title')}</h3>
+          <CvPanel data={cv.en} lang="en" />
+          <CvPanel data={cv.ru} lang="ru" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------------------------------------------------------------- MEDIA */
+export function Media() {
+  const { t } = useLang();
+  const { media } = useContent();
+  const total = media.reduce((n, g) => n + g.items.length, 0);
+  return (
+    <section aria-labelledby="media" className="bg-paper">
+      <div className="gutter mx-auto max-w-sheet py-16 md:py-28">
+        <SectionHead sheet="A-05" id="media" title={t('media.title')} aside={t('media.aside', { n: total })} />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-14">
+          {media.map((g) => (
+            <Reveal key={g.id} className="min-w-0">
+              <h3 className="flex items-baseline justify-between gap-4 border-b border-strong pb-2">
+                <span className="display-condensed uppercase text-[clamp(22px,2.2vw,30px)]">{g.title}</span>
+                <span className="label text-accent-ink tabular">{String(g.items.length).padStart(2, '0')}</span>
+              </h3>
+              <ul>
+                {g.items.map((it) => (
+                  <li key={it.url} className="border-b border-rule">
+                    <a href={it.url} target="_blank" rel="noreferrer" className="group grid grid-cols-[1fr_auto] gap-x-4 py-3">
+                      <span className="min-w-0">
+                        <span className="label text-mute block">
+                          {t(`kind.${it.kind}`)} · {it.outlet}
+                          {it.year ? ` · ${it.year}` : ''}
+                        </span>
+                        <span className="text-[16px] leading-snug block mt-1">
+                          <span className="card-title">{it.title}</span>
+                        </span>
+                      </span>
+                      <span className="label text-accent-ink pt-1" aria-hidden="true">↗</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
@@ -227,21 +361,17 @@ export function About() {
 }
 
 /* -------------------------------------------------------------------- CONTACT */
-function ContactRow({ label, value, href, placeholder }) {
+function ContactRow({ label, value, href, external = true }) {
   return (
     <div className="grid grid-cols-12 gap-x-4 py-4 border-b items-baseline" style={{ borderColor: 'color-mix(in srgb, currentColor 30%, transparent)' }}>
       <span className="col-span-4 md:col-span-3 label opacity-80">{label}</span>
-      <span className="col-span-8 md:col-span-9 text-[18px] md:text-[22px] break-words select-all">
-        {value ? (
-          href ? (
-            <a href={href} target="_blank" rel="noreferrer" className="ulink">
-              {value}
-            </a>
-          ) : (
-            value
-          )
+      <span className="col-span-8 md:col-span-9 text-[18px] md:text-[22px] break-words">
+        {href ? (
+          <a href={href} {...(external ? { target: '_blank', rel: 'noreferrer' } : {})} className="ulink select-all">
+            {value}
+          </a>
         ) : (
-          <span className="font-mono text-[15px] border-b border-dashed border-current opacity-90">{placeholder}</span>
+          <span className="select-all">{value}</span>
         )}
       </span>
     </div>
@@ -251,11 +381,12 @@ function ContactRow({ label, value, href, placeholder }) {
 export function Contact() {
   const { t, lang } = useLang();
   const { contact } = useContent();
+  const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(t('contact.whatsapp.message'))}`;
   return (
     <section aria-labelledby="contact" className="inverse bg-contact text-on-contact">
       <div className="gutter mx-auto max-w-sheet py-16 md:py-28">
         <div className="grid grid-cols-12 gap-x-4 md:gap-x-6 border-t pt-3" style={{ borderColor: 'color-mix(in srgb, currentColor 70%, transparent)' }}>
-          <span className="col-span-12 md:col-span-2 label opacity-80">{t('sheet')} {sheetNo(lang, '05')}</span>
+          <span className="col-span-12 md:col-span-2 label opacity-80">{t('sheet')} {sheetNo(lang, '06')}</span>
           <div className="col-span-12 md:col-span-10 min-w-0">
             <h2 id="contact" className="display uppercase text-contact-head text-[calc(var(--ds)*clamp(44px,8.6vw,140px))] mt-4 md:mt-0 break-words">
               {t('contact.title')}
@@ -263,25 +394,23 @@ export function Contact() {
           </div>
         </div>
         <div className="grid grid-cols-12 gap-x-4 md:gap-x-6 gap-y-10 mt-10 md:mt-16">
-          <p className="col-span-12 md:col-span-5 md:col-start-3 text-[20px] leading-[1.45] max-w-[38ch]">{t('contact.text')}</p>
-          <div className="col-span-12 md:col-span-5 min-w-0">
-            <ContactRow label={t('contact.email')} value={contact.email} href={contact.email ? `mailto:${contact.email}` : null} placeholder={t('contact.email.missing')} />
-            <ContactRow label={t('contact.linkedin')} value={contact.linkedin ? t('contact.linkedin.value') : null} href={contact.linkedin} placeholder={t('contact.linkedin.missing')} />
-            <ContactRow label={t('contact.based')} value={contact.location} />
-            <div className="mt-8">
-              {contact.email ? (
-                <a
-                  href={`mailto:${contact.email}`}
-                  className="chip inline-flex items-center gap-3 bg-on-contact text-contact px-6 py-4 label text-[12px] hover:opacity-85 transition-opacity"
-                >
-                  {t('contact.cta')} <Arrow />
-                </a>
-              ) : (
-                <span className="chip inline-flex items-center gap-3 border border-dashed border-current px-6 py-4 label text-[12px]" aria-disabled="true">
-                  {t('contact.cta.missing')}
-                </span>
-              )}
+          <div className="col-span-12 md:col-span-5 md:col-start-3">
+            <p className="text-[20px] leading-[1.45] max-w-[38ch]">{t('contact.text')}</p>
+            <div className="flex flex-wrap gap-3 mt-8">
+              <a href={`mailto:${contact.email}`} className="chip inline-flex items-center gap-3 bg-on-contact text-contact px-6 py-4 label text-[12px] hover:opacity-85 transition-opacity">
+                {t('contact.cta')} <Arrow />
+              </a>
+              <a href={wa} target="_blank" rel="noreferrer" className="chip inline-flex items-center gap-3 border-2 border-current px-6 py-4 label text-[12px] hover:bg-on-contact hover:text-contact transition-colors">
+                {t('contact.whatsapp')} <Arrow />
+              </a>
             </div>
+          </div>
+          <div className="col-span-12 md:col-span-5 min-w-0">
+            <ContactRow label={t('contact.email')} value={contact.email} href={`mailto:${contact.email}`} external={false} />
+            <ContactRow label="WhatsApp" value={contact.phone} href={wa} />
+            <ContactRow label="LinkedIn" value="adiya-karsybek-urbanist" href={contact.linkedin} />
+            <ContactRow label={t('contact.telegram')} value={contact.telegramHandle} href={contact.telegram} />
+            <ContactRow label={t('contact.based')} value={contact.location} />
           </div>
         </div>
       </div>
@@ -294,10 +423,10 @@ export function Footer() {
   const { site } = useContent();
   return (
     <footer className="bg-ink text-paper">
-      <div className="gutter mx-auto max-w-sheet pt-6 pb-24 md:pb-6 flex flex-col md:flex-row gap-2 justify-between label opacity-75">
+      <div className="gutter mx-auto max-w-sheet py-6 flex flex-col md:flex-row gap-2 justify-between label opacity-75">
         <span>© {new Date().getFullYear()} {site.name}</span>
-        <span>{t('footer.proto')}</span>
-        <span className="tabular md:mr-56">{site.coordinates}</span>
+        <span>{site.base}</span>
+        <span className="tabular">{site.coordinates}</span>
       </div>
     </footer>
   );

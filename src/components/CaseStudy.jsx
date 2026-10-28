@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useContent, useLang } from '../i18n/index.jsx';
 import { img } from '../lib/images.js';
-import { Arrow, PlaceholderArt, Reveal, StatusChip, T } from './primitives.jsx';
+import { Arrow, Reveal, StatusChip, T } from './primitives.jsx';
 import { Cover } from './Work.jsx';
 
 function Block({ no, label, children }) {
@@ -51,6 +51,7 @@ export function CaseStudy({ slug }) {
   const { projects, featured: featuredProjects, expertise } = useContent();
   const p = projects.find((x) => x.slug === slug);
   const [open, setOpen] = useState(null);
+  const [showPhotos, setShowPhotos] = useState(false);
 
   if (!p) {
     return (
@@ -113,10 +114,9 @@ export function CaseStudy({ slug }) {
           ))}
         </dl>
 
-        <figure className="mt-10 md:mt-14">
+        <div className="mt-10 md:mt-14">
           <Cover project={p} className="aspect-[16/9] w-full" />
-          {p.gallery[0] && <figcaption className="label text-mute mt-2">{t('case.fig')} 1 — {p.gallery[0].caption}</figcaption>}
-        </figure>
+        </div>
 
         <div className="mt-10 md:mt-16">
           <Block no="01" label={t('case.context')}><T as="p" className="text-[19px] leading-[1.6]">{p.context}</T></Block>
@@ -153,36 +153,81 @@ export function CaseStudy({ slug }) {
           )}
         </div>
 
-        {/* Gallery */}
-        <section aria-label={t('case.gallery')} className="border-t border-strong pt-3 mt-6">
-          <div className="flex justify-between label text-mute mb-6">
-            <span>{t('case.gallery')}</span>
-            <span className="tabular">{p.gallery.length ? t('case.figures', { n: p.gallery.length }) : t('case.nomaterial')}</span>
-          </div>
-          {p.gallery.length > 1 ? (
-            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 md:gap-x-6 gap-y-8">
-              {p.gallery.slice(1).map((g, i) => (
-                <li key={g.src}>
-                  <button type="button" onClick={() => setOpen(g)} className="group block w-full text-left">
-                    <div className="plate aspect-[4/3] overflow-hidden bg-sheet border border-rule">
-                      <img src={img(g.src)} alt={g.caption} loading="lazy" className="w-full h-full object-contain p-2" />
-                    </div>
-                    <span className="label text-mute mt-2 block">{t('case.fig')} {i + 2} — {g.caption}</span>
-                  </button>
-                </li>
-              ))}
-            </ul>
+        {/* Photos, documents and links */}
+        <section aria-labelledby="materials" className="border-t border-strong pt-3 mt-6">
+          <h2 id="materials" className="label text-mute mb-6">{t('case.materials')}</h2>
+
+          {/* Photos — collapsed until opened */}
+          {p.gallery.length > 0 ? (
+            <div>
+              <button
+                type="button"
+                aria-expanded={showPhotos}
+                aria-controls="case-photos"
+                onClick={() => setShowPhotos((v) => !v)}
+                className="chip label inline-flex items-center gap-3 border border-strong px-4 py-3 hover:bg-sel hover:text-on-sel hover:border-sel transition-colors"
+              >
+                <span aria-hidden="true" className="text-[14px] leading-none">{showPhotos ? '−' : '+'}</span>
+                {showPhotos ? t('case.photos.hide') : t('case.photos.show', { n: p.gallery.length })}
+              </button>
+              <ul id="case-photos" hidden={!showPhotos} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 md:gap-x-6 gap-y-8 mt-8">
+                {p.gallery.map((g, i) => (
+                  <li key={g.src}>
+                    <button type="button" onClick={() => setOpen(g)} className="group block w-full text-left">
+                      <div className="plate aspect-[4/3] overflow-hidden bg-sheet border border-rule">
+                        <img src={img(g.src)} alt={g.caption} loading="lazy" className="w-full h-full object-contain p-2" />
+                      </div>
+                      <span className="label text-mute mt-2 block">{t('case.fig')} {i + 1} — {g.caption}</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
-              {['a', 'b', 'c'].map((k, i) => (
-                <div key={k} className={`aspect-[4/3] border border-rule ${i > 0 ? 'hidden sm:block' : ''}`}>
-                  <PlaceholderArt seed={p.slug + k} motif={['blocks', 'contours', 'dots'][i]} slug={p.slug} />
+            <p className="label text-mute">{t('case.photos.none')}</p>
+          )}
+
+          {(p.docs.length > 0 || p.links.length > 0) && (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-6 mt-12">
+              {p.docs.length > 0 && (
+                <div className="min-w-0">
+                  <h3 className="label text-mute border-b border-strong pb-2">{t('case.docs')}</h3>
+                  <ul>
+                    {p.docs.map((d) => (
+                      <li key={d.file} className="border-b border-rule">
+                        <a href={d.file} target="_blank" rel="noreferrer" download className="group flex items-center justify-between gap-4 py-3.5">
+                          <span className="flex items-center gap-3 min-w-0">
+                            <span className="label bg-accent text-on-accent px-1.5 py-0.5 shrink-0">PDF</span>
+                            <span className="text-[16px] card-title">{d.title}</span>
+                          </span>
+                          <span className="label text-accent-ink shrink-0">{t('case.download')} ↓</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              ))}
+              )}
+              {p.links.length > 0 && (
+                <div className="min-w-0">
+                  <h3 className="label text-mute border-b border-strong pb-2">{t('case.links')}</h3>
+                  <ul>
+                    {p.links.map((l) => (
+                      <li key={l.url} className="border-b border-rule">
+                        <a href={l.url} target="_blank" rel="noreferrer" className="group grid grid-cols-[6.5rem_1fr_auto] items-baseline gap-3 py-3.5">
+                          <span className="label text-mute">{t(`kind.${l.kind}`)}</span>
+                          <span className="text-[16px] min-w-0 break-words card-title">{l.title}</span>
+                          <span className="label text-accent-ink" aria-hidden="true">↗</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           )}
+
           {p.credits && (
-            <p className="label text-mute mt-6 normal-case tracking-normal text-[12px]">
+            <p className="label text-mute mt-8 normal-case tracking-normal text-[12px]">
               <span className="uppercase tracking-[0.08em]">{t('case.credits')}</span>
               <T>{p.credits}</T>
             </p>

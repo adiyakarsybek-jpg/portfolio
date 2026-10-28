@@ -3,7 +3,7 @@ import { useContent, useLang } from '../i18n/index.jsx';
 import { LangSwitch } from './Controls.jsx';
 import { Arrow } from './primitives.jsx';
 
-export const NAV = ['work', 'expertise', 'initiatives', 'about', 'contact'];
+export const NAV = ['work', 'expertise', 'initiatives', 'about', 'media', 'contact'];
 
 export function Header() {
   const { t, lang } = useLang();

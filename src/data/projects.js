@@ -1,46 +1,66 @@
 /* =====================================================================
    PROJECTS — single source of truth for the Work grid, Archive and
-   case-study pages.
+   case-study pages. Russian text lives in src/data/ru/projects.js.
 
    EDITING RULES
-   • Any text wrapped in square brackets, e.g. "[Outcome to be confirmed]",
-     is rendered as a visible editorial placeholder (dashed cobalt style).
-     Replace it with real text and the placeholder styling disappears.
-   • Images: put files in  src/assets/projects/<slug>/  and list them in
-     `gallery` as "<slug>/<file>.jpg". The first image is the cover.
-     Add  fit: 'contain'  to an image to show the whole page (good for
-     portrait report pages) instead of cropping it.
-     Leave `gallery: []` to show a generated cartographic placeholder.
-   • `status`   : 'completed' | 'ongoing' | 'academic' | 'initiative' | 'concept' | 'confidential'
-   • `expertise`: ids from src/data/expertise.js — drives filters and the
-     links from the Expertise section.
-   • `featured: true` puts the project in Selected Work; otherwise it
-     appears in the Archive index.
+   • Text in [square brackets] is shown as a visible placeholder.
+   • `art`     : the generated cover drawing (see src/components/ProjectArt.jsx):
+                 flood · landscape · play · network · twin · streets · women ·
+                 research · crossing · trees · contours · blocks · leaves ·
+                 stadium · river · transit · homes
+   • `gallery` : photos shown inside the case study (collapsed by default).
+                 Files live in src/assets/projects/<slug>/. `fit: 'contain'`
+                 shows the whole image instead of cropping it.
+   • `docs`    : downloadable files in /public/docs/… (title + titleRu).
+   • `links`   : external pages — kind: site · social · article · video ·
+                 event · award (title + titleRu).
+   • `status`  : 'completed' | 'ongoing' | 'academic' | 'initiative' | 'concept' | 'confidential'
+   • `expertise`: ids from src/data/expertise.js (filters + Expertise links).
+   • `featured: true` → Selected Work; otherwise → Archive.
    ===================================================================== */
+
+const portfolioDoc = (slug) => ({
+  title: 'Project pages from the 2024 portfolio (PDF)',
+  titleRu: 'Страницы проекта из портфолио 2024 (PDF)',
+  file: `docs/projects/portfolio-2024_${slug}.pdf`,
+});
 
 export const projects = [
   /* ------------------------------------------------------------------ 01 */
   {
     slug: 'undp-petropavlovsk',
     featured: true,
+    art: 'flood',
     title: 'Urban Resilience & Climate Adaptation',
     client: 'UNDP Kazakhstan',
     location: 'Petropavlovsk, Kazakhstan',
-    years: '2025–2026',
+    years: '2025–present',
     status: 'ongoing',
-    statusNote: '[Confirm: ongoing or completed]',
-    themes: ['Climate Adaptation', 'Urban Resilience', 'Strategic Planning'],
+    themes: ['Climate Adaptation', 'Disaster Risk Reduction', 'Master Planning'],
     expertise: ['strategy', 'climate', 'partnerships'],
-    placeholder: 'contours',
-    summary: '[One-sentence summary of the assignment to be added]',
-    context: '[Project context to be confirmed — e.g. the city, the climate risks addressed and why UNDP initiated the work.]',
-    challenge: '[Challenge to be confirmed]',
-    role: '[My role and responsibilities to be confirmed]',
-    approach: ['[Methodology step to be confirmed]', '[Stakeholder engagement approach to be confirmed]'],
-    outputs: ['[Key output to be confirmed]'],
-    outcomes: '[Outcome to be confirmed]',
-    collaborators: ['UNDP Kazakhstan', '[Other partners to be confirmed]'],
+    summary:
+      'A concept for Petropavlovsk’s master plan that builds climate adaptation and disaster risk reduction into the city’s long-term planning.',
+    context:
+      'Petropavlovsk is exposed to annual flooding of the Esil River. With UNDP Kazakhstan, the city is bringing a climate-change and disaster risk reduction (DRR) methodology into municipal planning and decision-making.',
+    challenge:
+      'Turn an international climate and DRR methodology into planning decisions a city administration can adopt, and make the approach replicable for other cities in the region.',
+    role:
+      'As National Consultant for Urban Planning and Climate Resilience, I lead the technical adaptation of the methodology, author the concept for the master plan and line-manage a team of two planners.',
+    approach: [
+      'Adapting UNDP’s climate-change and DRR methodology to municipal master planning.',
+      'Coordinating local government, ministries, UNDP and international technical experts, and aligning their strategies.',
+      'Analytical materials and strategic options for scaling the approach to other cities in the region.',
+      'A concept note and funding application for an urban climate-resilience project.',
+    ],
+    outputs: [
+      'Concept for the Petropavlovsk Master Plan with climate adaptation, DRR and resilience measures',
+      'Concept note and funding application for an urban climate-resilience project, UNDP Kazakhstan',
+    ],
+    outcomes: '[Project ongoing — results to be added]',
+    collaborators: ['UNDP Kazakhstan', 'Petropavlovsk city administration', 'International experts in resilient cities and DRR'],
     gallery: [],
+    docs: [],
+    links: [],
     credits: '[Confirm which materials may be shown publicly]',
   },
 
@@ -48,24 +68,38 @@ export const projects = [
   {
     slug: 'bi-group-landscape',
     featured: true,
-    title: 'Landscape Product Strategy',
-    client: 'BI Group',
-    location: 'Kazakhstan',
+    art: 'landscape',
+    title: 'Landscape Master Plan Product',
+    client: 'BI Group (BI Development)',
+    location: 'Astana, Kazakhstan',
     years: '2025–2026',
-    status: 'ongoing',
-    statusNote: '[Confirm: ongoing or completed]',
-    themes: ['Product Strategy', 'Urban Development', 'Landscape'],
-    expertise: ['strategy', 'partnerships'],
-    placeholder: 'blocks',
-    summary: '[One-sentence summary of the assignment to be added]',
-    context: '[Project context to be confirmed — the developer’s portfolio and why a landscape product strategy was needed.]',
-    challenge: '[Challenge to be confirmed]',
-    role: '[My role and responsibilities to be confirmed]',
-    approach: ['[Methodology step to be confirmed]'],
-    outputs: ['[Key output to be confirmed]'],
+    status: 'completed',
+    themes: ['Product Strategy', 'Green Infrastructure', 'Standards'],
+    expertise: ['strategy', 'climate', 'partnerships'],
+    summary:
+      'A new corporate unit for landscape and green-infrastructure master planning at Kazakhstan’s largest developer.',
+    context:
+      'BI Group develops residential and mixed-use districts across Kazakhstan. The company set up a new product line for landscape master planning across its projects.',
+    challenge:
+      'Bring corporate landscape standards in line with sustainability goals and international practice, and make them work across the company and its design partners.',
+    role:
+      'As Manager for Landscape Master Plan Product Development, I established and led the new unit and supervised its landscape designers.',
+    approach: [
+      'Research and gap analysis of corporate landscape standards against international practice.',
+      'A resident-participation survey to ground landscape planning in community needs.',
+      'Digitalisation of design standards and landscape design processes, including Revit.',
+      'Company-wide rollout together with design firms.',
+    ],
+    outputs: [
+      'Updated corporate landscape standards and regulations',
+      'Resident survey — first phase of data collection completed',
+      'Digital design standards for landscape projects',
+    ],
     outcomes: '[Outcome to be confirmed]',
-    collaborators: ['[Internal teams / consultants to be confirmed]'],
+    collaborators: ['BI Group design and development teams', 'Partner design firms'],
     gallery: [],
+    docs: [],
+    links: [],
     credits: '[Confirm confidentiality and which materials may be shown]',
   },
 
@@ -73,6 +107,7 @@ export const projects = [
   {
     slug: 'unicef-inclusive-play',
     featured: true,
+    art: 'play',
     title: 'Inclusive Play Spaces',
     client: 'UNICEF Kazakhstan — Play Spaces for All',
     location: 'Kazakhstan',
@@ -81,32 +116,53 @@ export const projects = [
     themes: ['Inclusive Design', 'Policy', 'Research'],
     expertise: ['inclusion', 'research'],
     summary:
-      'A national methodological guide for planning, designing and delivering playgrounds that work for every child, including children with disabilities.',
+      'A national methodological guide for planning, designing and delivering playgrounds that work for every child, including children with disabilities and chronic illness.',
     context:
-      'Within UNICEF’s Play Spaces for All initiative, our team was funded from November 2021 to March 2022 to look at how play spaces in Kazakhstan are planned and built. Despite efforts toward inclusion, most playgrounds still did not cater to all children.',
+      'Within UNICEF’s Play Spaces for All initiative, Q88 delivered a $50,000 UNICEF-funded project from November 2021 to March 2022, in cooperation with the Ministry of Labour and Social Protection. Despite efforts toward inclusion, most playgrounds in Kazakhstan still did not cater to all children.',
     challenge:
       'Turn international good practice into guidance that is practical for Kazakh municipalities and compatible with the national legislative framework for playgrounds and accessibility.',
-    role: 'I led the research and managed the project.',
+    role: 'I managed the project across the full cycle, from proposal to delivery, and led the research.',
     approach: [
       'A dual review: global best practice in inclusive play alongside an audit of Kazakhstan’s existing play spaces.',
       'Analysis of the national legislative framework for playgrounds and inclusion, to locate where regulation needed improvement.',
-      'Standard solutions and design prototypes for kindergarten and park playgrounds, giving clear planning and design guidance.',
-      'An online forum where government officials, educators, parents and international experts discussed the future of play spaces in Kazakhstan.',
+      'Standard solutions and design prototypes for kindergarten and park playgrounds, for children with disabilities and chronic illness.',
+      'An online forum, presented with UNICEF, where government officials, educators, parents and international experts discussed the future of play spaces.',
     ],
     outputs: [
       'Methodological guide on organising inclusive play spaces in the Republic of Kazakhstan — 38 pages, in Russian and Kazakh',
       'Planning and design framework and principles for inclusive playgrounds',
       'Design prototypes for kindergarten and park playgrounds',
-      'National online forum on inclusive play',
+      'National online forum on inclusive play, presented with UNICEF',
     ],
-    outcomes: '[Adoption or use of the guide by municipalities to be confirmed]',
-    collaborators: ['UNICEF Kazakhstan', '[Project team / firm to be confirmed]'],
+    outcomes: 'The research findings were published by UNICEF and covered by national media. [Adoption of the guide by municipalities to be confirmed]',
+    collaborators: ['UNICEF Kazakhstan', 'Q88', 'Ministry of Labour and Social Protection of Kazakhstan'],
     gallery: [
       { src: 'unicef/01.jpg', fit: 'contain', caption: 'Who needs inclusive play spaces — opening chapter of the guide.' },
       { src: 'unicef/02.jpg', caption: 'Key principles, illustrated.' },
       { src: 'unicef/03.jpg', caption: 'Prototype: kindergarten playground.' },
       { src: 'unicef/04.jpg', caption: 'Principles for creating inclusive playgrounds — from exclusion to inclusion.' },
       { src: 'unicef/05.jpg', caption: 'Prototype: park playground.' },
+    ],
+    docs: [portfolioDoc('unicef-inclusive-play')],
+    links: [
+      {
+        kind: 'article',
+        title: 'UNICEF press release: what inclusive playgrounds should be like',
+        titleRu: 'Пресс-релиз ЮНИСЕФ: какими должны быть инклюзивные детские площадки',
+        url: 'https://www.unicef.org/kazakhstan/Пресс-релизы/юнисеф-и-казахстанские-урбанисты-рассказали-какими-должны-быть-инклюзивные-детские',
+      },
+      {
+        kind: 'article',
+        title: 'Zakon.kz: playgrounds don’t interest children over 10 — study results',
+        titleRu: 'Zakon.kz: детские площадки неинтересны детям старше 10 лет — исследование',
+        url: 'https://www.zakon.kz/sobytiia/6007989-detskie-ploshchadki-v-kazakhstane-ne-interesny-rebenku-starshe-10-let-issledovanie.html',
+      },
+      {
+        kind: 'article',
+        title: 'Kazinform: urbanists on a comfortable city for all',
+        titleRu: 'Казинформ: «Урбанисты: комфортный город для всех»',
+        url: 'https://www.inform.kz/ru/urbanisty-komfortnyy-gorod-dlya-vseh_a3909889',
+      },
     ],
     credits: 'Pages from the published guide. Developed in Russian and Kazakh.',
   },
@@ -115,6 +171,7 @@ export const projects = [
   {
     slug: 'wealmaty',
     featured: true,
+    art: 'network',
     title: 'Urban Governance & Community Engagement',
     client: 'WeAlmaty — British Council, KBTU, Almaty Akimat, Almaty Development Centre',
     location: 'Almaty, Kazakhstan',
@@ -123,13 +180,13 @@ export const projects = [
     themes: ['Community Engagement', 'Urban Governance', 'Partnerships'],
     expertise: ['partnerships', 'research'],
     summary:
-      'A three-year, EU-funded programme helping the City of Almaty work with civil society on culture, business and active citizenship.',
+      'A three-year, $400,000 EU-funded programme helping the City of Almaty work with civil society on culture, business and active citizenship.',
     context:
-      'WeAlmaty supported the City of Almaty in realising its development vision to 2020, helping local government leaders work with civil society. It was designed and run by a coalition of the British Council, the Kazakh-British Technical University, the Almaty Akimat and the Almaty Development Centre, and funded by a European Union grant.',
+      'WeAlmaty supported the City of Almaty in realising its development vision to 2020, helping local government leaders work with civil society. It was run by a coalition of the British Council, the Kazakh-British Technical University, the Almaty Akimat and the Almaty Development Centre, and funded by a European Union grant.',
     challenge:
       'Build a working relationship between city government and citizens at a time when public participation in urban development was new for Almaty.',
     role:
-      'I managed the project on behalf of the Almaty Development Centre and set the agenda and themes of its events.',
+      'I helped establish and deliver the project on behalf of the Almaty Development Centre, and set the agenda and themes of its events.',
     approach: [
       'Large public forums that brought citizens into the conversation about urban development for the first time.',
       'Workshops in which selected citizens developed their own urban proposals.',
@@ -150,6 +207,11 @@ export const projects = [
       { src: 'wealmaty/03.jpg', caption: 'With colleagues from the Akimat, British Council and KBTU at the grants selection.' },
       { src: 'wealmaty/04.jpg', caption: '“Almaty — City for Children” forum, organised with UNICEF.' },
     ],
+    docs: [portfolioDoc('wealmaty')],
+    links: [
+      { kind: 'site', title: 'WeAlmaty on the British Council website', titleRu: 'WeAlmaty на сайте Британского Совета', url: 'https://www.britishcouncil.kz/wealmaty/about' },
+      { kind: 'social', title: 'WeAlmaty on Facebook', titleRu: 'WeAlmaty в Facebook', url: 'https://www.facebook.com/wealmaty/' },
+    ],
     credits: 'Event photographs are published in open access by WeAlmaty and the British Council.',
   },
 
@@ -157,13 +219,14 @@ export const projects = [
   {
     slug: 'q88-concept-plans',
     featured: true,
+    art: 'twin',
     title: 'Urban Development Strategies',
-    client: 'Q88 — Association of Urbanists of Kazakhstan',
+    client: 'Q88 — Association for Sustainable Territorial Development',
     location: 'Pavlodar & Atyrau, Kazakhstan',
     years: '2021–2022',
     status: 'completed',
-    themes: ['Strategic Planning', 'Urban Development', 'Policy'],
-    expertise: ['strategy', 'research'],
+    themes: ['Strategic Planning', 'Urban Development', 'Co-design'],
+    expertise: ['strategy', 'research', 'partnerships'],
     summary:
       'Concept plans giving two city administrations a multi-year programme for urban development, public space and green infrastructure.',
     context:
@@ -171,11 +234,11 @@ export const projects = [
     challenge:
       'Translate city-wide diagnosis into a programme that local authorities could act on within a three- to five-year horizon.',
     role:
-      'Pavlodar: site analysis, work with the community and authorship of the final report. Atyrau: desk research and authorship of the final report.',
+      'As Lead Urban Planner and co-founder of Q88: in Pavlodar, site analysis, work with residents and the final report; in Atyrau, desk research and the final report.',
     approach: [
-      'Site analysis and fieldwork in Pavlodar, including engagement with local residents.',
+      'Site analysis and fieldwork in Pavlodar, with participatory co-design events for residents, professional bodies and public institutions.',
       'Desk research on Atyrau’s urban structure, public spaces and river corridor.',
-      'Framing proposals as a development programme rather than a single masterplan.',
+      'Proposals framed as a development programme rather than a single masterplan.',
     ],
     outputs: [
       'Pavlodar concept plan, 2022–2025 — 136 pages',
@@ -183,12 +246,20 @@ export const projects = [
       'Both reports written in Russian',
     ],
     outcomes: '[Adoption and implementation status to be confirmed]',
-    collaborators: ['Q88', '[Local authority partners to be confirmed]'],
+    collaborators: ['Q88', 'Akimats of Pavlodar region and Pavlodar city', '[Atyrau partners to be confirmed]'],
     gallery: [
       { src: 'q88/01.jpg', caption: 'Pavlodar 2022–2025: conceptual approaches — report cover.' },
       { src: 'q88/02.jpg', caption: 'Atyrau 2021–2025: conceptual approaches — report cover.' },
       { src: 'q88/03.jpg', caption: 'Pavlodar: forming urban connections between districts.' },
       { src: 'q88/04.jpg', caption: 'Atyrau: urban infrastructure priorities.' },
+    ],
+    docs: [portfolioDoc('q88-concept-plans')],
+    links: [
+      { kind: 'site', title: 'Q88 Association website', titleRu: 'Сайт ассоциации Q88', url: 'https://q88.kz/ru' },
+      { kind: 'article', title: 'Pavon.kz on the Pavlodar concept', titleRu: 'Pavon.kz о концепции для Павлодара', url: 'https://pavon.kz/post/view/72064' },
+      { kind: 'article', title: 'Pavon.kz: Pavlodar city development', titleRu: 'Pavon.kz: развитие Павлодара', url: 'https://pavon.kz/post/view/72057' },
+      { kind: 'video', title: 'Interview on the development of Pavlodar (YouTube)', titleRu: 'Интервью о развитии Павлодара (YouTube)', url: 'https://www.youtube.com/watch?v=l-qercBzrJM' },
+      { kind: 'social', title: 'Q88 Telegram channel post', titleRu: 'Публикация в Telegram-канале Q88', url: 'https://kaz.tgstat.com/channel/@Association_q88/3142' },
     ],
     credits: 'Report pages. Developed in Russian.',
   },
@@ -197,6 +268,7 @@ export const projects = [
   {
     slug: 'gehl-almaty-public-space',
     featured: true,
+    art: 'streets',
     title: 'Public Space Guidelines',
     client: 'City of Almaty with Gehl Architects',
     location: 'Almaty, Kazakhstan',
@@ -207,11 +279,11 @@ export const projects = [
     summary:
       'Guidelines for Almaty’s squares, parks and streets, developed by the city team in collaboration with Gehl Architects.',
     context:
-      'The guideline describes the public spaces of Almaty — squares, parks and streets. It has two kinds of pages: white pages, developed by the team representing the City of Almaty, and blue pages, developed by Gehl Architects.',
+      'The guideline describes the public spaces of Almaty — squares, parks and streets. It has two kinds of pages: white pages, developed by the team representing the City of Almaty, and blue pages, developed by Gehl Architects. The collaboration also covered the regeneration of Almaty’s Golden Square.',
     challenge:
       'Give the city a shared typology of public spaces and streets that could guide future design decisions.',
     role:
-      'Working as an urbanist for the city side, I assisted colleagues from Gehl Architects with street typology research and, under their supervision, developed the typology of Almaty’s streets.',
+      'As Senior Architect–Urbanist at the Almaty Urban Studies / Development Centre, I assisted colleagues from Gehl Architects with street typology research and, under their supervision, developed the typology of Almaty’s streets.',
     approach: [
       'Research into Almaty’s existing street network and public spaces.',
       'Typology of public spaces, developed by the city team.',
@@ -221,6 +293,7 @@ export const projects = [
       'Public space guideline for Almaty — 52 pages, in Russian',
       'Typology of seven street types in Almaty',
       'Strategic principles for urban mobility',
+      'Contribution to Almaty’s first 10 km BRT corridor',
     ],
     outcomes: '[Use of the guideline in city projects to be confirmed]',
     collaborators: ['Gehl Architects', 'City of Almaty', 'Almaty Development Centre'],
@@ -229,6 +302,8 @@ export const projects = [
       { src: 'gehl/02.jpg', caption: 'Street types in Almaty.' },
       { src: 'gehl/03.jpg', caption: 'Street types in Almaty (continued).' },
     ],
+    docs: [],
+    links: [],
     credits: 'Only the city team’s white pages are shown. Gehl Architects’ blue pages remain their property.',
   },
 
@@ -236,24 +311,29 @@ export const projects = [
   {
     slug: 'ayel-qala',
     featured: true,
-    title: 'Gender-Inclusive Cities Initiative',
+    art: 'women',
+    title: 'Women in Urban Development Network',
     client: 'Ayel&Qala',
-    location: 'Kazakhstan',
+    location: 'Kazakhstan & Central Asia',
     years: '2025–present',
     status: 'initiative',
-    themes: ['Gender Inclusion', 'Urban Advocacy', 'Community'],
+    themes: ['Gender Inclusion', 'Leadership', 'Community'],
     expertise: ['inclusion', 'partnerships'],
-    placeholder: 'dots',
     summary:
-      'An initiative advancing gender-inclusive urban development and women’s participation in shaping cities.',
-    context: '[Why Ayel&Qala was founded and the gap it addresses — to be added]',
+      'A professional network advancing women’s leadership in urban development across Kazakhstan and Central Asia.',
+    context: 'Ayel&Qala brings together women working in urban planning and development for networking, knowledge exchange and the promotion of leaders in the field. [Founding story to be added]',
     challenge: '[Challenge to be confirmed]',
-    role: '[Founder / co-founder — exact role to be confirmed]',
-    approach: ['[Programme or activity to be added]'],
+    role: 'Founder.',
+    approach: ['Networking and peer support for women in the urban sector.', 'Knowledge exchange and public events.', 'Promoting women leaders in the field.'],
     outputs: ['[Events, publications or projects to be added]'],
     outcomes: '[Outcome to be confirmed]',
     collaborators: ['[Partners to be confirmed]'],
     gallery: [],
+    docs: [],
+    links: [
+      { kind: 'social', title: 'Ayel&Qala on Telegram', titleRu: 'Ayel&Qala в Telegram', url: 'https://t.me/ayelmenqala' },
+      { kind: 'social', title: 'Ayel&Qala on Instagram', titleRu: 'Ayel&Qala в Instagram', url: 'https://www.instagram.com/p/DYpP0UCgrMD/' },
+    ],
     credits: '',
   },
 
@@ -261,31 +341,78 @@ export const projects = [
   {
     slug: 'ucl-gender-leadership',
     featured: true,
-    title: 'Gender, Leadership & Urban Planning',
+    art: 'research',
+    title: 'Women in Planning: Gender, Leadership & Decision-Making',
     client: 'UCL, The Bartlett School of Planning',
     location: 'London / Kazakhstan',
-    years: '2024–2025',
+    years: '2023–2024',
     status: 'academic',
     themes: ['Research', 'Gender', 'Planning Leadership'],
     expertise: ['inclusion', 'research'],
-    placeholder: 'lines',
-    summary: '[Research question in one sentence — to be added]',
-    context: '[Research context to be added]',
-    challenge: '[Research question to be confirmed]',
-    role: '[Author — confirm whether dissertation or post-graduation research]',
+    summary:
+      'Master’s dissertation on women in the urban planning profession in Kazakhstan and their influence on decision-making.',
+    context:
+      'Written for the Master of Planning in City Planning at The Bartlett School of Planning, UCL, an RTPI- and RICS-accredited programme, studied with a Bolashak scholarship from the Government of Kazakhstan.',
+    challenge: '[Research question in one sentence — to be added]',
+    role: 'Author. Supervisor: Dr Susan Moore, The Bartlett, UCL.',
     approach: ['[Research methods to be confirmed — e.g. interviews, policy review]'],
-    outputs: ['[Dissertation / paper title to be confirmed]'],
-    outcomes: '[Recognition linked to this research to be confirmed]',
-    collaborators: ['[Supervisor to be confirmed]'],
+    outputs: [
+      'Dissertation graded High Distinction',
+      'Presented at an Academy of Urbanism webinar (UK)',
+      'Presented at the practice–academic conference “Women & Planning: From Theory to Practice”, Leeds, 2024',
+    ],
+    outcomes:
+      'Awarded the Pumarino Prize 2023/24 for the best planning dissertation by an MPlan or MRes student at The Bartlett, and shortlisted for the RTPI Award for Research Excellence (Student Dissertation).',
+    collaborators: ['The Bartlett School of Planning, UCL'],
     gallery: [],
+    docs: [
+      { title: 'Pumarino Prize 2023/24 certificate (PDF)', titleRu: 'Сертификат Pumarino Prize 2023/24 (PDF)', file: 'docs/awards/Pumarino_Prize_2023-24_Adiya_Karsybek.pdf' },
+    ],
+    links: [
+      { kind: 'award', title: 'UCL Bartlett: inaugural Pumarino Prize for the best MPlan/MRes dissertation', titleRu: 'UCL Bartlett: первая премия Pumarino за лучшую диссертацию MPlan/MRes', url: 'https://www.ucl.ac.uk/bartlett/news/2025/jun/award-inaugural-pumarino-prize-best-mplanmres-dissertation-2023-24' },
+      { kind: 'award', title: 'RTPI Awards for Research Excellence — Adiya Karsybek, UCL', titleRu: 'RTPI Awards for Research Excellence — Адия Карсыбек, UCL', url: 'https://www.rtpi.org.uk/events-training-and-awards/awards/rtpi-awards-for-research-excellence/adiya-karsybek-ucl/' },
+      { kind: 'event', title: 'Academy of Urbanism webinar — dissertation presentation', titleRu: 'Вебинар Академии урбанизма — презентация диссертации', url: 'https://www.theaou.org/events/december-coffee-break' },
+      { kind: 'article', title: 'Town Planning Review — Leeds conference, 2024', titleRu: 'Town Planning Review — конференция в Лидсе, 2024', url: 'https://www.liverpooluniversitypress.co.uk/doi/full/10.3828/tpr.2024.49' },
+      { kind: 'social', title: 'The Bartlett School of Planning on X', titleRu: 'The Bartlett School of Planning в X', url: 'https://x.com/UCL_BSP/status/1942965006821191981' },
+    ],
     credits: '',
   },
 
   /* ================================================================
-     ARCHIVE — earlier professional work and academic projects (2016–2024)
+     ARCHIVE — earlier professional work and academic projects
      ================================================================ */
   {
+    slug: 'vision-zero-almaty',
+    art: 'crossing',
+    title: 'Vision Zero Almaty',
+    client: 'AlmatyElectroTrans',
+    location: 'Almaty, Kazakhstan',
+    years: '2019–2020',
+    status: 'completed',
+    themes: ['Road Safety', 'Public Transport', 'Street Design'],
+    expertise: ['strategy', 'research'],
+    summary: 'Implementation of the Vision Zero road-safety programme in Almaty, redesigning major streets around public and active transport.',
+    context: 'Almaty adopted Vision Zero to reduce deaths and serious injuries on its streets, with priority for public transport, walking and cycling.',
+    challenge: 'Move from a policy commitment to redesigned streets, coordinated across city departments.',
+    role: 'As Manager for Transport Infrastructure Development, I coordinated implementation of the programme and managed a team of four specialists.',
+    approach: [
+      'Redesign of seven major streets with safer layouts and priority for public and active transport.',
+      'Integrated design and monitoring measures.',
+      'Internal qualitative research on organisational reform, presented to the company board and city authorities.',
+    ],
+    outputs: ['Seven redesigned streets', 'Recommendations on organisational reform'],
+    outcomes: 'Contributed to a reduction in annual traffic fatalities in Almaty from 71 to 25.',
+    collaborators: ['AlmatyElectroTrans', 'City of Almaty'],
+    gallery: [],
+    docs: [],
+    links: [
+      { kind: 'article', title: 'Kaztag: results of Almaty’s transport and pedestrian transformation', titleRu: 'Kaztag: результаты трансформации транспортно-пешеходной инфраструктуры Алматы', url: 'https://kaztag.kz/ru/news/rezultaty-transformatsii-transportno-peshekhodnoy-infrastruktury-almaty-budut-zametny-k-kontsu-goda-akimat' },
+    ],
+    credits: '',
+  },
+  {
     slug: 'vision-zero-pavlodar',
+    art: 'crossing',
     title: 'Vision Zero Pavlodar',
     client: 'Road safety programme for the city of Pavlodar',
     location: 'Pavlodar, Kazakhstan',
@@ -305,19 +432,25 @@ export const projects = [
     ],
     outputs: ['Vision Zero plan for Pavlodar — 65 pages, in Russian', 'Target set by the plan: reduce traffic deaths and injuries by at least 30%'],
     outcomes: 'Partially implemented in several street redevelopment projects. [Details to be confirmed]',
-    collaborators: ['Q88', 'Kantai City Planning', '[Confirm partners]'],
+    collaborators: ['Q88', 'Kantai City Planning'],
     gallery: [
       { src: 'vision-zero/01.jpg', caption: 'Report cover.' },
       { src: 'vision-zero/02.jpg', caption: 'Street design as the basis of the Vision Zero plan.' },
       { src: 'vision-zero/03.jpg', caption: 'Results of Vision Zero Almaty used as a reference.' },
       { src: 'vision-zero/04.jpg', caption: 'Pavlodar streets proposed for redesign.' },
     ],
+    docs: [portfolioDoc('vision-zero-pavlodar')],
+    links: [
+      { kind: 'article', title: 'Kazinform: Vision Zero proposed for Kazakhstan', titleRu: 'Казинформ: «Безопасность на дорогах: концепцию Vision Zero предлагают внедрить в РК»', url: 'https://www.inform.kz/ru/bezopasnost-na-dorogah-koncepciyu-vision-zero-predlagayut-vnedrit-v-rk_a3920716' },
+      { kind: 'article', title: 'Exclusive.kz: how Vision Zero could change Kazakhstan’s roads', titleRu: 'Exclusive.kz: как Vision Zero может изменить дороги Казахстана', url: 'https://exclusive.kz/smertelno-opasnye-ulicy-kak-vision-zero-mozhet-izmenit-dorogi-v-kazakhstane/' },
+    ],
     credits: 'Report pages. Developed in Russian.',
   },
   {
     slug: 'ush-tut-pocket-park',
+    art: 'trees',
     title: 'Ush Tut Pocket Park',
-    client: 'Urban planner and designer position',
+    client: 'Turkistan City Lab',
     location: 'Turkistan, Kazakhstan',
     years: '2020',
     status: 'concept',
@@ -325,27 +458,53 @@ export const projects = [
     expertise: ['inclusion', 'partnerships'],
     summary: 'A pocket park co-designed with neighbours and named after the three mulberry trees on the site.',
     context:
-      'The site was home to three mulberry trees — “Ush Tut” in Kazakh — which became the basis for the park’s name, identity and branding.',
+      'One of seven urban design projects I led as Senior Urban Planner/Designer at Turkistan City Lab. The site was home to three mulberry trees — “Ush Tut” in Kazakh — which became the basis for the park’s name, identity and branding.',
     challenge: 'Produce a delivery-ready concept with local residents. The project was not built: local authorities judged it not viable and no sponsor was found.',
     role: 'I developed the project, including all placemaking ideas. Colleagues helped organise co-design events and produce AutoCAD drawings.',
     approach: [
-      'Co-design events with local neighbours.',
+      'Co-design events with local neighbours, including women, children and people with disabilities.',
       'Site analysis, design concept, visualisation and detailed design.',
       'A play structure built around the tapchan, a traditional Central Asian canopy.',
     ],
     outputs: ['Concept report — 40 pages, in Russian, five chapters'],
     outcomes: 'Not implemented.',
-    collaborators: ['Local residents', '[Colleagues to be credited]'],
+    collaborators: ['Turkistan City Lab', 'Local residents'],
     gallery: [
       { src: 'ush-tut/01.jpg', caption: 'Visualisation of one of the park views.' },
       { src: 'ush-tut/02.jpg', caption: 'Play structure with a tapchan canopy.' },
       { src: 'ush-tut/03.jpg', caption: 'Wayfinding and branding details.' },
       { src: 'ush-tut/04.jpg', caption: 'Masterplan with furniture locations.' },
     ],
+    docs: [portfolioDoc('ush-tut-pocket-park')],
+    links: [],
     credits: 'Concept report. Developed in Russian.',
   },
   {
+    slug: 'converted-homes',
+    art: 'homes',
+    title: 'Converted Homes Study',
+    client: 'UCL, The Bartlett School of Planning — Research Assistant',
+    location: 'London, UK',
+    years: '2024',
+    status: 'completed',
+    themes: ['Housing', 'Health', 'Qualitative Research'],
+    expertise: ['research'],
+    summary: 'Primary research on the health, well-being and climate-related impacts of permitted-development housing across England.',
+    context: 'A research project led by Prof Ben Clifford and Prof Helen Pineo on homes created through permitted-development conversions.',
+    challenge: 'Collect reliable first-hand evidence on living conditions in converted homes.',
+    role: 'Research Assistant (May–December 2024).',
+    approach: ['Semi-structured interviews with residents.', 'Systematic site observation.', 'Standardised home assessments under ethical research protocols.'],
+    outputs: ['Qualitative data for the study'],
+    outcomes: '[Publication to be linked when available]',
+    collaborators: ['The Bartlett School of Planning, UCL'],
+    gallery: [],
+    docs: [],
+    links: [],
+    credits: '',
+  },
+  {
     slug: 'thamesmead',
+    art: 'contours',
     title: 'Thamesmead Redevelopment',
     client: 'UCL — Plan Making Studio II',
     location: 'London, UK',
@@ -369,10 +528,13 @@ export const projects = [
       { src: 'thamesmead/01.jpg', caption: 'Poster 1: strategic rationale for planning and spatial policies.' },
       { src: 'thamesmead/02.jpg', caption: 'Poster 2: tactical solutions and mitigation policies.' },
     ],
+    docs: [portfolioDoc('thamesmead')],
+    links: [],
     credits: 'Group academic work, UCL.',
   },
   {
     slug: 'kings-square',
+    art: 'blocks',
     title: 'Kings Square Estate',
     client: 'UCL — Plan Making Studio I',
     location: 'Islington, London',
@@ -393,10 +555,13 @@ export const projects = [
       { src: 'kings-square/02.jpg', caption: 'Hard and soft densification diagrams.' },
       { src: 'kings-square/03.jpg', caption: 'Placemaking masterplan.' },
     ],
+    docs: [portfolioDoc('kings-square')],
+    links: [],
     credits: 'Individual academic work, UCL.',
   },
   {
     slug: 'biophilic-urbanism',
+    art: 'leaves',
     title: 'Biophilic Urbanism',
     client: 'UCL — Sustainable Futures by Design',
     location: 'Wandle Valley, London',
@@ -416,10 +581,13 @@ export const projects = [
       { src: 'biophilic/01.jpg', fit: 'contain', caption: 'Poster 1: interventions in the industrial zone.' },
       { src: 'biophilic/02.jpg', caption: 'Poster 2: “creative writing” interview, ten years on.' },
     ],
+    docs: [portfolioDoc('biophilic-urbanism')],
+    links: [],
     credits: 'Individual academic work, UCL.',
   },
   {
     slug: 'wembley-park',
+    art: 'stadium',
     title: 'Wembley Park',
     client: 'UCL — Urban Design: Place Making',
     location: 'London, UK',
@@ -440,10 +608,13 @@ export const projects = [
       { src: 'wembley/02.jpg', caption: 'Figure-ground of Wembley Park.' },
       { src: 'wembley/03.jpg', caption: 'Masterplan overview.' },
     ],
+    docs: [portfolioDoc('wembley-park')],
+    links: [],
     credits: 'Group academic work, UCL.',
   },
   {
     slug: 'south-poplar',
+    art: 'river',
     title: 'South Poplar',
     client: 'UCL — Urban Design: Layout, Density and Typology',
     location: 'London, UK',
@@ -465,28 +636,33 @@ export const projects = [
       { src: 'south-poplar/03.jpg', caption: 'Section of the active embankment.' },
       { src: 'south-poplar/04.jpg', caption: 'Street sections developed for the report.' },
     ],
+    docs: [portfolioDoc('south-poplar')],
+    links: [],
     credits: 'Group academic work, UCL.',
   },
   {
     slug: 'dar-internship',
+    art: 'transit',
     title: 'TOD Benchmarking & City Centre Masterplan',
-    client: 'Internship — Dar, London',
-    location: 'Addis Ababa / Saudi Arabia',
+    client: 'Dar Al-Handasah — Planning & Urban Design Intern',
+    location: 'London, UK',
     years: '2024',
     status: 'confidential',
-    themes: ['Transit-Oriented Development', 'Masterplanning'],
+    themes: ['Transit-Oriented Development', 'Industrial Symbiosis', 'Masterplanning'],
     expertise: ['research'],
-    summary: 'Research on transit-oriented development with a gender and informality lens, and graphics for a city-centre masterplan.',
-    context: 'A benchmarking exercise of TOD cases in Tokyo, Contra Costa, Pune and Addis Ababa to guide interventions on four sites in Addis Ababa; and graphics for two districts of a city-centre masterplan in Saudi Arabia.',
-    challenge: 'Fast-paced client work on two international projects.',
-    role: 'I researched TOD precedents with attention to gender mainstreaming and informality, and produced district diagrams in Illustrator and AutoCAD.',
-    approach: ['Comparative benchmarking of four TOD cases.', 'A colour and graphic system for five districts.'],
+    summary: 'International benchmarking on transit-oriented development and industrial symbiosis, and graphics for a city-centre masterplan.',
+    context:
+      'A master’s placement in the planning and urban design department, working on master plans across EMEA, Europe and the Americas.',
+    challenge: 'Fast-paced client work on several international projects.',
+    role: 'I researched TOD precedents with attention to gender mainstreaming and informality, and produced client-facing diagrams.',
+    approach: ['Comparative benchmarking of TOD and industrial-symbiosis cases.', 'A colour and graphic system for five districts.'],
     outputs: ['Contributions to confidential client reports'],
     outcomes: 'Confidential — no material shown.',
-    collaborators: ['Dar'],
+    collaborators: ['Dar Al-Handasah'],
     gallery: [],
-    placeholder: 'lines',
-    credits: 'Both reports are confidential.',
+    docs: [],
+    links: [],
+    credits: 'Client reports are confidential.',
   },
 ];
 
