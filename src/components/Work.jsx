@@ -1,5 +1,5 @@
 import { useContent, useLang } from '../i18n/index.jsx';
-import { ProjectArt } from './ProjectArt.jsx';
+import { ProjectArtV2 } from './ProjectArtV2.jsx';
 import { Arrow, Reveal, SectionHead, StatusChip, T } from './primitives.jsx';
 
 const pad = (n) => String(n).padStart(2, '0');
@@ -17,9 +17,10 @@ const LAYOUT = [
 ];
 
 export function Cover({ project, className = '' }) {
+  const { lang } = useLang();
   return (
     <div className={`plate relative overflow-hidden border border-rule ${className}`}>
-      <ProjectArt project={project} className="absolute inset-0" />
+      <ProjectArtV2 project={project} lang={lang} className="absolute inset-0" />
     </div>
   );
 }

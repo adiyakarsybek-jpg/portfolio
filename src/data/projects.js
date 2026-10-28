@@ -4,7 +4,7 @@
 
    EDITING RULES
    • Text in [square brackets] is shown as a visible placeholder.
-   • `art`     : the generated cover drawing (see src/components/ProjectArt.jsx):
+   • `art`     : the generated cover drawing (see src/components/ProjectArtV2.jsx):
                  flood · landscape · play · network · twin · streets · women ·
                  research · crossing · trees · contours · blocks · leaves ·
                  stadium · river · transit · homes

@@ -34,7 +34,7 @@ One palette (Electric Pink). All colours are tokens at the top of `src/index.css
 - Diploma and award certificate images (shown on the page, not downloadable): `src/assets/about/`.
 - Project PDFs: `public/docs/projects/`, listed per project in `docs` in `src/data/projects.js`.
 - Portrait: `src/assets/about/portrait.jpg`.
-- Project covers are generated drawings (`src/components/ProjectArt.jsx`); choose one per project with `art`.
+- Project covers are generated conceptual diagrams (`src/components/ProjectArtV2.jsx`); choose one per project with `art`.
 - Publications, interviews and talks: `media` in `src/data/site.js`.
 
 ## Workflow
