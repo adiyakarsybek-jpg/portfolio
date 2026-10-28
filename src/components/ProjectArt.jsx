@@ -23,7 +23,7 @@ function rng(seed) {
 const path = (pts) => 'M' + pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' L');
 
 /* a field of rectangular blocks, skipping cells where skip(x, y) is true */
-function blocks(r, { x0 = 0, y0 = 0, x1 = 400, y1 = 300, min = 22, max = 52, gap = 7, skip = () => false, fill = INK, hit = 0, accent = ACC } = {}) {
+function blocks(r, { x0 = 0, y0 = 0, x1 = 400, y1 = 300, min = 22, max = 52, gap = 7, skip = () => false, fill = INK, hit = 0, accent = ACC, stroke = 'none', strokeWidth = 0 } = {}) {
   const out = [];
   for (let y = y0; y < y1; ) {
     const h = min + r() * (max - min) * 0.7;
@@ -31,7 +31,7 @@ function blocks(r, { x0 = 0, y0 = 0, x1 = 400, y1 = 300, min = 22, max = 52, gap
       const w = min + r() * (max - min);
       if (!skip(x + w / 2, y + h / 2)) {
         const isHit = r() < hit;
-        out.push(<rect key={`${x}-${y}`} x={x} y={y} width={w} height={h} fill={isHit ? accent : fill} />);
+        out.push(<rect key={`${x}-${y}`} x={x} y={y} width={w} height={h} fill={isHit ? accent : fill} stroke={stroke} strokeWidth={strokeWidth} />);
       }
       x += w + gap;
     }
@@ -59,56 +59,53 @@ const MOTIFS = {
     );
   },
 
+  /* Quiet covers (02–05): thin linework, no heavy fills, one small accent. */
+
   /* BI Group — courtyards with trees */
   landscape(r) {
     const out = [];
     for (let i = 0; i < 4; i++)
       for (let j = 0; j < 3; j++) {
-        const x = 14 + i * 98, y = 14 + j * 96, w = 86, h = 84;
+        const x = 18 + i * 96, y = 18 + j * 92, w = 84, h = 80;
         const hit = i === 2 && j === 1;
-        out.push(<rect key={`b${i}${j}`} x={x} y={y} width={w} height={h} fill={INK} />);
-        out.push(<rect key={`c${i}${j}`} x={x + 14} y={y + 14} width={w - 28} height={h - 28} fill={hit ? ACC : PAPER} />);
-        for (let t = 0; t < 4; t++)
-          out.push(<circle key={`t${i}${j}${t}`} cx={x + 24 + r() * (w - 48)} cy={y + 24 + r() * (h - 48)} r={4 + r() * 6} fill="none" stroke={hit ? INK : INK} strokeWidth="1" />);
+        out.push(<rect key={`b${i}${j}`} x={x} y={y} width={w} height={h} fill="none" stroke={INK} strokeWidth="1" opacity="0.55" />);
+        out.push(<rect key={`c${i}${j}`} x={x + 12} y={y + 12} width={w - 24} height={h - 24} fill={hit ? ACC : 'none'} fillOpacity={hit ? 0.18 : 0} stroke={INK} strokeWidth="0.6" opacity="0.4" />);
+        for (let t = 0; t < 3; t++)
+          out.push(<circle key={`t${i}${j}${t}`} cx={x + 22 + r() * (w - 44)} cy={y + 22 + r() * (h - 44)} r={3 + r() * 4} fill="none" stroke={INK} strokeWidth="0.6" opacity="0.45" />);
       }
     return <>{out}</>;
   },
 
-  /* UNICEF — play elements and an accessible loop path */
+  /* UNICEF — play elements around an accessible loop path */
   play(r) {
     const items = [];
-    for (let i = 0; i < 14; i++) {
-      const cx = 30 + r() * 340, cy = 30 + r() * 240, rad = 8 + r() * 26;
-      items.push(<circle key={i} cx={cx} cy={cy} r={rad} fill={i % 5 === 0 ? INK : 'none'} stroke={INK} strokeWidth="1.2" />);
+    for (let i = 0; i < 12; i++) {
+      const cx = 40 + r() * 320, cy = 40 + r() * 220, rad = 6 + r() * 18;
+      items.push(<circle key={i} cx={cx} cy={cy} r={rad} fill="none" stroke={INK} strokeWidth="0.8" opacity="0.45" />);
     }
     return (
       <>
-        <ellipse cx="200" cy="150" rx="160" ry="100" fill="none" stroke={ACC} strokeWidth="10" />
+        <ellipse cx="200" cy="150" rx="150" ry="95" fill="none" stroke={INK} strokeWidth="1" strokeDasharray="4 5" opacity="0.6" />
         {items}
-        <circle cx="200" cy="150" r="34" fill={ACC} />
-        <circle cx="200" cy="150" r="14" fill={PAPER} />
+        <circle cx="200" cy="150" r="9" fill={ACC} />
       </>
     );
   },
 
   /* WeAlmaty — a participation network */
   network(r) {
-    const nodes = Array.from({ length: 26 }, () => [20 + r() * 360, 20 + r() * 260]);
+    const nodes = Array.from({ length: 22 }, () => [30 + r() * 340, 30 + r() * 240]);
     const c = [200, 150];
     return (
       <>
         {nodes.map(([x, y], i) => (
-          <line key={`l${i}`} x1={c[0]} y1={c[1]} x2={x} y2={y} stroke={INK} strokeWidth="0.7" opacity="0.55" />
+          <line key={`l${i}`} x1={c[0]} y1={c[1]} x2={x} y2={y} stroke={INK} strokeWidth="0.5" opacity="0.3" />
         ))}
-        {nodes.map(([x, y], i) => {
-          const [x2, y2] = nodes[(i + 3) % nodes.length];
-          return <line key={`m${i}`} x1={x} y1={y} x2={x2} y2={y2} stroke={INK} strokeWidth="0.5" opacity="0.3" />;
-        })}
         {nodes.map(([x, y], i) => (
-          <circle key={`n${i}`} cx={x} cy={y} r={i % 4 === 0 ? 7 : 4} fill={i % 7 === 0 ? ACC : INK} />
+          <circle key={`n${i}`} cx={x} cy={y} r="2.5" fill={INK} opacity="0.6" />
         ))}
-        <circle cx={c[0]} cy={c[1]} r="22" fill={ACC} />
-        <circle cx={c[0]} cy={c[1]} r="34" fill="none" stroke={INK} />
+        <circle cx={c[0]} cy={c[1]} r="7" fill={ACC} />
+        <circle cx={c[0]} cy={c[1]} r="18" fill="none" stroke={INK} strokeWidth="0.6" opacity="0.5" />
       </>
     );
   },
@@ -117,17 +114,18 @@ const MOTIFS = {
   twin(r) {
     const half = (ox, label, curve) => (
       <g key={label}>
-        {blocks(r, { x0: ox + 8, x1: ox + 192, y0: 8, y1: 292, min: 14, max: 34, gap: 5, skip: (x, y) => Math.abs(x - ox - curve(y)) < 18, hit: 0.05 })}
-        <path d={path(Array.from({ length: 31 }, (_, k) => [ox + curve(k * 10), k * 10]))} fill="none" stroke={ACC} strokeWidth="10" />
-        <rect x={ox + 10} y="262" width="26" height="26" fill={PAPER} stroke={INK} />
-        <text x={ox + 23} y="280" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="13" fill={INK}>{label}</text>
+        <g opacity="0.45">
+          {blocks(r, { x0: ox + 10, x1: ox + 190, y0: 10, y1: 290, min: 14, max: 34, gap: 6, skip: (x, y) => Math.abs(x - ox - curve(y)) < 16, fill: 'none', stroke: INK, strokeWidth: 0.7 })}
+        </g>
+        <path d={path(Array.from({ length: 31 }, (_, k) => [ox + curve(k * 10), k * 10]))} fill="none" stroke={ACC} strokeWidth="2" opacity="0.85" />
+        <text x={ox + 14} y="284" fontFamily="var(--font-mono)" fontSize="11" fill={INK} opacity="0.7">{label}</text>
       </g>
     );
     return (
       <>
-        {half(0, 'P', (y) => 40 + y * 0.12 + Math.sin(y / 60) * 10)}
-        <line x1="200" y1="0" x2="200" y2="300" stroke={INK} strokeWidth="2" />
-        {half(200, 'A', (y) => 120 + Math.sin(y / 45) * 30)}
+        {half(0, 'PAVLODAR', (y) => 40 + y * 0.12 + Math.sin(y / 60) * 10)}
+        <line x1="200" y1="10" x2="200" y2="290" stroke={INK} strokeWidth="0.6" opacity="0.5" />
+        {half(200, 'ATYRAU', (y) => 120 + Math.sin(y / 45) * 30)}
       </>
     );
   },
