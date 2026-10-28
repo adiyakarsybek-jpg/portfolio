@@ -49,7 +49,7 @@ export const education = [
     title: 'Master of Planning (City Planning), with Distinction',
     place: 'University College London, The Bartlett School of Planning',
     year: '2024',
-    doc: { title: 'Diploma (PDF)', file: 'docs/awards/UCL_Master_of_Planning_Diploma_Adiya_Karsybek.pdf' },
+    image: { key: 'diploma', alt: 'UCL Master of Planning diploma, awarded 1 October 2024' },
   },
   { title: 'Bachelor of Architecture', place: 'Satbayev University, Almaty', year: '2016' },
   { title: 'Exchange programme in Architecture & Urban Design', place: 'Bialystok University of Technology, Poland', year: '2015–2016' },
@@ -60,7 +60,7 @@ export const recognition = [
     title: 'Pumarino Prize 2023/24',
     place: 'Best planning dissertation by an MPlan or MRes student, The Bartlett School of Planning, UCL',
     year: '2025',
-    doc: { title: 'Certificate (PDF)', file: 'docs/awards/Pumarino_Prize_2023-24_Adiya_Karsybek.pdf' },
+    image: { key: 'pumarino', alt: 'Pumarino Prize 2023/24 certificate, The Bartlett School of Planning, UCL' },
     link: { title: 'UCL news', url: 'https://www.ucl.ac.uk/bartlett/news/2025/jun/award-inaugural-pumarino-prize-best-mplanmres-dissertation-2023-24' },
   },
   {

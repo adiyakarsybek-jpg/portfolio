@@ -235,6 +235,7 @@ export const projectsRu = {
     outcomes:
       'Премия Pumarino 2023/24 за лучшую диссертацию по планированию среди студентов MPlan и MRes в The Bartlett и шорт-лист RTPI Award for Research Excellence (Student Dissertation).',
     collaborators: ['Бартлеттская школа планирования, UCL'],
+    captions: ['Сертификат Pumarino Prize 2023/24, Бартлеттская школа планирования UCL.'],
   },
 
   /* ---------------------------------------------------------------- АРХИВ */

@@ -34,7 +34,7 @@ export const trajectoryRu = [
 ];
 
 export const educationRu = [
-  { title: 'Master of Planning (City Planning), с отличием', place: 'Университетский колледж Лондона (UCL), Бартлеттская школа планирования', doc: { title: 'Диплом (PDF)', file: 'docs/awards/UCL_Master_of_Planning_Diploma_Adiya_Karsybek.pdf' } },
+  { title: 'Master of Planning (City Planning), с отличием', place: 'Университетский колледж Лондона (UCL), Бартлеттская школа планирования', image: { key: 'diploma', alt: 'Диплом UCL Master of Planning, 1 октября 2024' } },
   { title: 'Бакалавр архитектуры', place: 'Satbayev University, Алматы' },
   { title: 'Программа обмена: архитектура и городской дизайн', place: 'Белостокский технический университет, Польша' },
 ];
@@ -43,7 +43,7 @@ export const recognitionRu = [
   {
     title: 'Премия Pumarino 2023/24',
     place: 'За лучшую диссертацию по планированию среди студентов MPlan и MRes, Бартлеттская школа планирования UCL',
-    doc: { title: 'Сертификат (PDF)', file: 'docs/awards/Pumarino_Prize_2023-24_Adiya_Karsybek.pdf' },
+    image: { key: 'pumarino', alt: 'Сертификат Pumarino Prize 2023/24, Бартлеттская школа планирования UCL' },
     link: { title: 'Новость UCL', url: 'https://www.ucl.ac.uk/bartlett/news/2025/jun/award-inaugural-pumarino-prize-best-mplanmres-dissertation-2023-24' },
   },
   { title: 'RTPI Awards for Research Excellence — шорт-лист', place: 'Категория Student Dissertation Award, Королевский институт городского планирования (RTPI)' },

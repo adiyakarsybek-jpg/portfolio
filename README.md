@@ -31,7 +31,7 @@ One palette (Electric Pink). All colours are tokens at the top of `src/index.css
 
 ## Documents, CV, photos
 - CV files: `public/docs/cv/` — the expandable CV text is in `src/data/cv.js`.
-- Diploma and award certificates: `public/docs/awards/`.
+- Diploma and award certificate images (shown on the page, not downloadable): `src/assets/about/`.
 - Project PDFs: `public/docs/projects/`, listed per project in `docs` in `src/data/projects.js`.
 - Portrait: `src/assets/about/portrait.jpg`.
 - Project covers are generated drawings (`src/components/ProjectArt.jsx`); choose one per project with `art`.

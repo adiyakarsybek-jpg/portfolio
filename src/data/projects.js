@@ -364,10 +364,8 @@ export const projects = [
     outcomes:
       'Awarded the Pumarino Prize 2023/24 for the best planning dissertation by an MPlan or MRes student at The Bartlett, and shortlisted for the RTPI Award for Research Excellence (Student Dissertation).',
     collaborators: ['The Bartlett School of Planning, UCL'],
-    gallery: [],
-    docs: [
-      { title: 'Pumarino Prize 2023/24 certificate (PDF)', titleRu: 'Сертификат Pumarino Prize 2023/24 (PDF)', file: 'docs/awards/Pumarino_Prize_2023-24_Adiya_Karsybek.pdf' },
-    ],
+    gallery: [{ src: 'ucl-gender-leadership/01.jpg', fit: 'contain', caption: 'Pumarino Prize 2023/24 certificate, The Bartlett School of Planning, UCL.' }],
+    docs: [],
     links: [
       { kind: 'award', title: 'UCL Bartlett: inaugural Pumarino Prize for the best MPlan/MRes dissertation', titleRu: 'UCL Bartlett: первая премия Pumarino за лучшую диссертацию MPlan/MRes', url: 'https://www.ucl.ac.uk/bartlett/news/2025/jun/award-inaugural-pumarino-prize-best-mplanmres-dissertation-2023-24' },
       { kind: 'award', title: 'RTPI Awards for Research Excellence — Adiya Karsybek, UCL', titleRu: 'RTPI Awards for Research Excellence — Адия Карсыбек, UCL', url: 'https://www.rtpi.org.uk/events-training-and-awards/awards/rtpi-awards-for-research-excellence/adiya-karsybek-ucl/' },

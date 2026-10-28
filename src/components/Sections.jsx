@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useContent, useLang } from '../i18n/index.jsx';
 import { cv } from '../data/cv.js';
 import portrait from '../assets/about/portrait.jpg';
+import diploma from '../assets/about/ucl-diploma.jpg';
+import pumarino from '../assets/about/pumarino-prize.jpg';
+
+const AWARD_IMAGES = { diploma, pumarino };
 import { Arrow, PlaceholderArt, Reveal, SectionHead, T } from './primitives.jsx';
 
 const sheetNo = (lang, n) => `${lang === 'ru' ? 'А' : 'A'}-${n}`;
@@ -123,7 +127,36 @@ export function Initiatives() {
 }
 
 /* ---------------------------------------------------------------------- ABOUT */
+/* Full-screen view of a certificate image (view only) */
+function ImageView({ image, onClose }) {
+  const { t } = useLang();
+  useEffect(() => {
+    const onKey = (e) => e.key === 'Escape' && onClose();
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onClose]);
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={image.alt}
+      onClick={onClose}
+      className="fixed inset-0 z-[70] bg-ink/95 flex flex-col"
+      style={{ padding: 'max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px))' }}
+    >
+      <div className="flex justify-between items-center gap-4 text-paper label pb-3">
+        <span className="truncate">{image.alt}</span>
+        <button type="button" autoFocus onClick={onClose} className="border border-paper/60 px-3 py-1.5 shrink-0">{t('case.close')}</button>
+      </div>
+      <div className="flex-1 min-h-0 flex items-center justify-center">
+        <img src={AWARD_IMAGES[image.key]} alt={image.alt} className="max-w-full max-h-full object-contain bg-white" onContextMenu={(e) => e.preventDefault()} draggable="false" />
+      </div>
+    </div>
+  );
+}
+
 function ListBlock({ title, items }) {
+  const [view, setView] = useState(null);
   return (
     <div className="min-w-0">
       <h3 className="label text-mute border-b border-strong pb-2 mb-1">{title}</h3>
@@ -139,6 +172,13 @@ function ListBlock({ title, items }) {
               <p className="text-[13px] mt-1">
                 <T>{it.note}</T>
               </p>
+            )}
+            {it.image && (
+              <button type="button" onClick={() => setView(it.image)} className="group block w-full mt-3 text-left" aria-label={it.image.alt}>
+                <span className="plate block border border-rule bg-white overflow-hidden">
+                  <img src={AWARD_IMAGES[it.image.key]} alt={it.image.alt} loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} className="block w-full h-auto" />
+                </span>
+              </button>
             )}
             {(it.doc || it.link) && (
               <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2">
@@ -157,6 +197,7 @@ function ListBlock({ title, items }) {
           </li>
         ))}
       </ul>
+      {view && <ImageView image={view} onClose={() => setView(null)} />}
     </div>
   );
 }
