@@ -54,7 +54,7 @@ function Pathway({ ds, width = 6, opacity = 0.5 }) {
 /* 01 — UNDP / Petropavlovsk: flood-risk cartography.
    River banks, two floodplain lines, a dashed urban edge with a few blocks,
    and two small hatched risk zones where the city meets the floodplain. */
-function Flood({ id, L }) {
+function Flood({ id, L, water = INK }) {
   const river = 'M-10 236 C 70 240, 120 206, 200 218 S 330 240, 410 200';
   const blocks = [
     [118, 62, 34, 22], [160, 62, 46, 22], [214, 62, 30, 22], [252, 70, 40, 22],
@@ -69,12 +69,12 @@ function Flood({ id, L }) {
         </pattern>
       </defs>
       {/* floodplain */}
-      <path d={river} transform="translate(0 -30)" fill="none" stroke={INK} strokeWidth="0.6" strokeDasharray="2 4" opacity="0.45" />
-      <path d={river} transform="translate(0 -52)" fill="none" stroke={INK} strokeWidth="0.6" strokeDasharray="2 4" opacity="0.3" />
-      <path d={river} transform="translate(0 26)" fill="none" stroke={INK} strokeWidth="0.6" strokeDasharray="2 4" opacity="0.45" />
+      <path d={river} transform="translate(0 -30)" fill="none" stroke={water} strokeWidth="0.6" strokeDasharray="2 4" opacity="0.45" />
+      <path d={river} transform="translate(0 -52)" fill="none" stroke={water} strokeWidth="0.6" strokeDasharray="2 4" opacity="0.3" />
+      <path d={river} transform="translate(0 26)" fill="none" stroke={water} strokeWidth="0.6" strokeDasharray="2 4" opacity="0.45" />
       {/* river banks */}
-      <path d={river} transform="translate(0 -6)" fill="none" stroke={INK} strokeWidth="0.9" opacity="0.8" />
-      <path d={river} transform="translate(0 6)" fill="none" stroke={INK} strokeWidth="0.9" opacity="0.8" />
+      <path d={river} transform="translate(0 -6)" fill="none" stroke={water} strokeWidth="0.9" opacity="0.8" />
+      <path d={river} transform="translate(0 6)" fill="none" stroke={water} strokeWidth="0.9" opacity="0.8" />
       {/* urban edge and blocks */}
       <path d="M104 46 L304 46 L318 150 L262 176 L196 168 L112 158 Z" fill="none" stroke={INK} strokeWidth="0.8" strokeDasharray="6 4" opacity="0.6" />
       {blocks.map(([x, y, w, h], i) => (
@@ -85,9 +85,9 @@ function Flood({ id, L }) {
       <path d="M112 158 L150 162 L146 176 L116 172 Z" fill={`url(#${id}-hatch)`} stroke={PINK} strokeWidth="1" />
       {/* legend */}
       <g transform="translate(22 252)">
-        <line x1="0" y1="-2" x2="14" y2="-2" stroke={INK} strokeWidth="0.9" opacity="0.8" />
+        <line x1="0" y1="-2" x2="14" y2="-2" stroke={water} strokeWidth="0.9" opacity="0.8" />
         <Label x={20} y={0}>{L.river}</Label>
-        <line x1="70" y1="-2" x2="84" y2="-2" stroke={INK} strokeWidth="0.6" strokeDasharray="2 3" opacity="0.6" />
+        <line x1="70" y1="-2" x2="84" y2="-2" stroke={water} strokeWidth="0.6" strokeDasharray="2 3" opacity="0.6" />
         <Label x={90} y={0}>{L.floodplain}</Label>
         <rect x="158" y="-6" width="10" height="7" fill={`url(#${id}-hatch)`} stroke={PINK} strokeWidth="0.8" />
         <Label x={174} y={0}>{L.risk}</Label>
@@ -466,7 +466,7 @@ const MOTIFS = {
   crossing: Crossing, trees: Trees, homes: Homes, contours: Contours, blocks: Blocks, leaves: Leaves, stadium: Stadium, river: RiverEdge, transit: Transit,
 };
 
-export function ProjectArtV2({ project, lang = 'en', className = '' }) {
+export function ProjectArtV2({ project, lang = 'en', className = '', water }) {
   const Motif = MOTIFS[project.art] || Blocks;
   return (
     <div className={`overflow-hidden bg-sheet ${className || 'relative'}`}>
@@ -477,7 +477,7 @@ export function ProjectArtV2({ project, lang = 'en', className = '' }) {
           {Array.from({ length: 15 }, (_, i) => <line key={`v${i}`} x1={i * 28 + 4} y1="0" x2={i * 28 + 4} y2="300" />)}
           {Array.from({ length: 11 }, (_, i) => <line key={`h${i}`} x1="0" y1={i * 28 + 10} x2="400" y2={i * 28 + 10} />)}
         </g>
-        <Motif id={project.slug} L={LABELS[lang] || LABELS.en} />
+        <Motif id={project.slug} L={LABELS[lang] || LABELS.en} water={water} />
       </svg>
     </div>
   );

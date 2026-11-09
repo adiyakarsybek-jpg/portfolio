@@ -41,7 +41,7 @@ export const projects = [
     summary:
       'A concept for Petropavlovsk’s master plan that builds climate adaptation and disaster risk reduction into the city’s long-term planning.',
     context:
-      'Petropavlovsk is exposed to annual flooding of the Esil River. With UNDP Kazakhstan, the city is bringing a climate-change and disaster risk reduction (DRR) methodology into municipal planning and decision-making.',
+      'Petropavlovsk is exposed to annual flooding of the Esil River. Within the UNDP regional project “Enhancing Urban Resilience to Disaster Risk and Climate Change in Central Asia” (2024–2027), funded by the Government of Japan, the city is bringing a climate-change and disaster risk reduction (DRR) methodology into municipal planning and decision-making.',
     challenge:
       'Turn an international climate and DRR methodology into planning decisions a city administration can adopt, and make the approach replicable for other cities in the region.',
     role:
@@ -53,15 +53,56 @@ export const projects = [
       'A concept note and funding application for an urban climate-resilience project.',
     ],
     outputs: [
-      'Concept for the Petropavlovsk Master Plan with climate adaptation, DRR and resilience measures',
+      'Concept of the Climate (Master) Plan of Petropavlovsk, 2026–2040 — approved by the city akimat and agreed with the North Kazakhstan regional akimat',
+      'Roadmap for implementing the Concept, 2026–2027, with an outlook to 2040',
+      'Risk Profile of Petropavlovsk (UNDP, 2025) — co-authored with Kuanysh Magzumov',
       'Concept note and funding application for an urban climate-resilience project, UNDP Kazakhstan',
     ],
-    outcomes: '[Project ongoing — results to be added]',
-    collaborators: ['UNDP Kazakhstan', 'Petropavlovsk city administration', 'International experts in resilient cities and DRR'],
-    gallery: [],
+    outcomes:
+      'Based on the documents developed in the project, a competition for innovative projects has been announced, with grants of US$40,000 each. My consultancy contract runs until December 2026.',
+    collaborators: ['UNDP Kazakhstan', 'UNDP Istanbul Regional Hub', 'Akimat of Petropavlovsk', 'Government of Japan (funder)', 'International experts in resilient cities and DRR'],
+    brand: { blue: '0 104 177' }, // UNDP blue — extra accent on this case study
+    album: true, // photos shown as an open album with a swipeable viewer
+    gallery: [
+      { src: 'undp-petropavlovsk/01.jpg', caption: 'Regional meeting of the project with partners from Central Asian countries. [Place and date to be confirmed]' },
+      { src: 'undp-petropavlovsk/02.jpg', caption: 'Project participants from across Central Asia. [Place and date to be confirmed]' },
+      { src: 'undp-petropavlovsk/03.jpg', caption: 'Speaking at a regional workshop of the project. [Place and date to be confirmed]' },
+      { src: 'undp-petropavlovsk/04.jpg', caption: 'Working session on the decision support system (DSS). [Place and date to be confirmed]' },
+    ],
+    // View-only documents: pages are images in src/assets/docs/<id>/ (no file to download).
+    viewDocs: [
+      {
+        id: 'concept',
+        title: 'Concept of the Climate (Master) Plan of Petropavlovsk, 2026–2040',
+        titleRu: 'Концепция Климатического (Мастер) плана города Петропавловска, 2026–2040',
+        meta: 'Akimat of Petropavlovsk with UNDP Kazakhstan · in Russian',
+        metaRu: 'Акимат г. Петропавловска совместно с ПРООН Казахстан · на русском языке',
+      },
+      {
+        id: 'roadmap',
+        title: 'Roadmap for implementing the Concept, 2026–2027 (outlook to 2040)',
+        titleRu: 'Дорожная карта реализации Концепции, 2026–2027 (с перспективой до 2040)',
+        meta: 'Annex to the Concept · in Russian',
+        metaRu: 'Приложение к Концепции · на русском языке',
+      },
+      {
+        id: 'risk',
+        title: 'Risk Profile of Petropavlovsk',
+        titleRu: 'Профиль рисков Петропавловска (Risk Profile of Petropavlovsk)',
+        meta: 'UNDP, 2025 · authors: Adiya Karsybek, Kuanysh Magzumov · in English',
+        metaRu: 'ПРООН, 2025 · авторы: Адия Карсыбек, Куаныш Магзумов · на английском языке',
+      },
+    ],
     docs: [],
-    links: [],
-    credits: '[Confirm which materials may be shown publicly]',
+    links: [
+      {
+        kind: 'site',
+        title: 'Official project page — Enhancing Urban Resilience to Disaster Risk and Climate Change in Central Asia (UNDP)',
+        titleRu: 'Официальная страница проекта «Повышение устойчивости городов к рискам бедствий и изменению климата в Центральной Азии» (ПРООН)',
+        url: 'https://www.undp.org/kazakhstan/projects/enhancing-urban-resilience-disaster-risk-and-climate-change-central-asia',
+      },
+    ],
+    credits: 'Documents are shown for viewing only. Risk Profile © UNDP 2025, all rights reserved.'
   },
 
   /* ------------------------------------------------------------------ 02 */

@@ -54,6 +54,7 @@ function localizeProject(p, lang) {
     gallery: p.gallery.map((g, i) => ({ ...g, caption: captions?.[i] ?? g.caption })),
     docs: ruTitles(p.docs),
     links: ruTitles(p.links),
+    viewDocs: (p.viewDocs || []).map((d) => ({ ...d, title: d.titleRu || d.title, meta: d.metaRu || d.meta })),
   };
 }
 

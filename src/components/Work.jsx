@@ -16,11 +16,11 @@ const LAYOUT = [
   ['md:col-span-4', 'aspect-[16/10] md:aspect-[4/5]'],
 ];
 
-export function Cover({ project, className = '' }) {
+export function Cover({ project, className = '', water }) {
   const { lang } = useLang();
   return (
     <div className={`plate relative overflow-hidden border border-rule ${className}`}>
-      <ProjectArtV2 project={project} lang={lang} className="absolute inset-0" />
+      <ProjectArtV2 project={project} lang={lang} water={water} className="absolute inset-0" />
     </div>
   );
 }
