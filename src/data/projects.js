@@ -34,47 +34,55 @@ export const projects = [
     title: 'Urban Resilience & Climate Adaptation',
     client: 'UNDP Kazakhstan',
     location: 'Petropavlovsk, Kazakhstan',
-    years: '2025–present',
+    years: 'Jul 2025 – Dec 2026',
     status: 'ongoing',
-    themes: ['Climate Adaptation', 'Disaster Risk Reduction', 'Master Planning'],
+    themes: ['Climate Adaptation', 'Disaster Risk Reduction', 'Climate Master Planning'],
     expertise: ['strategy', 'climate', 'partnerships'],
     summary:
-      'A concept for Petropavlovsk’s master plan that builds climate adaptation and disaster risk reduction into the city’s long-term planning.',
+      'A concept for Petropavlovsk’s climate master plan that builds climate adaptation and disaster risk reduction into the city’s long-term planning.',
     context:
       'Petropavlovsk is exposed to annual flooding of the Esil River. Within the UNDP regional project “Enhancing Urban Resilience to Disaster Risk and Climate Change in Central Asia” (2024–2027), funded by the Government of Japan, the city is bringing a climate-change and disaster risk reduction (DRR) methodology into municipal planning and decision-making.',
     challenge:
       'Turn an international climate and DRR methodology into planning decisions a city administration can adopt, and make the approach replicable for other cities in the region.',
     role:
-      'As National Consultant for Urban Planning and Climate Resilience, I lead the technical adaptation of the methodology, author the concept for the master plan and line-manage a team of two planners.',
+      'As National Consultant for Urban Planning and Climate Resilience, I lead the technical adaptation of the methodology, author the concept for the climate master plan and line-manage a team of two planners.',
     approach: [
-      'Adapting UNDP’s climate-change and DRR methodology to municipal master planning.',
+      'Adapting UNDP’s climate-change and DRR methodology to municipal climate master planning.',
       'Coordinating local government, ministries, UNDP and international technical experts, and aligning their strategies.',
       'Analytical materials and strategic options for scaling the approach to other cities in the region.',
       'A concept note and funding application for an urban climate-resilience project.',
     ],
     outputs: [
-      'Concept of the Climate (Master) Plan of Petropavlovsk, 2026–2040 — approved by the city akimat and agreed with the North Kazakhstan regional akimat',
+      'Concept of the Climate Master Plan of Petropavlovsk, 2026–2040 — approved by the city akimat and agreed with the North Kazakhstan regional akimat',
       'Roadmap for implementing the Concept, 2026–2027, with an outlook to 2040',
       'Risk Profile of Petropavlovsk (UNDP, 2025) — co-authored with Kuanysh Magzumov',
       'Concept note and funding application for an urban climate-resilience project, UNDP Kazakhstan',
     ],
     outcomes:
-      'Based on the documents developed in the project, a competition for innovative projects has been announced, with grants of US$40,000 each. My consultancy contract runs until December 2026.',
-    collaborators: ['UNDP Kazakhstan', 'UNDP Istanbul Regional Hub', 'Akimat of Petropavlovsk', 'Government of Japan (funder)', 'International experts in resilient cities and DRR'],
+      'Based on the documents developed in the project, a competition for innovative projects has been announced, with grants of US$40,000 each.',
+    collaborators: [
+      'UNDP Kazakhstan',
+      'UNDP Istanbul Regional Hub',
+      'Project methodology — Ara Nazinyan, Armen Chilingaryan',
+      'Akimat of Petropavlovsk',
+      'Competence Centre at Kazakhstan Housing Company (KZhK) — Sanzhar Kaziev, Adiya Dzhansbayeva',
+      'Aliya Zhangeldy — independent urbanist',
+      'Government of Japan (funder)',
+    ],
     brand: { blue: '0 104 177' }, // UNDP blue — extra accent on this case study
     album: true, // photos shown as an open album with a swipeable viewer
     gallery: [
-      { src: 'undp-petropavlovsk/01.jpg', caption: 'Regional meeting of the project with partners from Central Asian countries. [Place and date to be confirmed]' },
-      { src: 'undp-petropavlovsk/02.jpg', caption: 'Project participants from across Central Asia. [Place and date to be confirmed]' },
-      { src: 'undp-petropavlovsk/03.jpg', caption: 'Speaking at a regional workshop of the project. [Place and date to be confirmed]' },
-      { src: 'undp-petropavlovsk/04.jpg', caption: 'Working session on the decision support system (DSS). [Place and date to be confirmed]' },
+      { src: 'undp-petropavlovsk/01.jpg', caption: 'Regional meeting of the project with partners from Central Asian countries. Dushanbe, Tajikistan, October 2025.' },
+      { src: 'undp-petropavlovsk/02.jpg', caption: 'Project participants from across Central Asia. Dushanbe, Tajikistan, October 2025.' },
+      { src: 'undp-petropavlovsk/03.jpg', caption: 'Speaking at a regional workshop of the project. Dushanbe, Tajikistan, October 2025.' },
+      { src: 'undp-petropavlovsk/04.jpg', caption: 'Working session on the decision support system (DSS). Petropavlovsk, Kazakhstan, July 2025.' },
     ],
     // View-only documents: pages are images in src/assets/docs/<id>/ (no file to download).
     viewDocs: [
       {
         id: 'concept',
-        title: 'Concept of the Climate (Master) Plan of Petropavlovsk, 2026–2040',
-        titleRu: 'Концепция Климатического (Мастер) плана города Петропавловска, 2026–2040',
+        title: 'Concept of the Climate Master Plan of Petropavlovsk, 2026–2040',
+        titleRu: 'Концепция климатического мастер-плана города Петропавловска, 2026–2040',
         meta: 'Akimat of Petropavlovsk with UNDP Kazakhstan · in Russian',
         metaRu: 'Акимат г. Петропавловска совместно с ПРООН Казахстан · на русском языке',
       },

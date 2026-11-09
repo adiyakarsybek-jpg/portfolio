@@ -31,7 +31,7 @@ export const cv = {
         points: [
           'Developed a concept note and funding application for an urban climate-resilience project, UNDP Kazakhstan.',
           'Lead the technical adaptation of a UNDP climate-change and DRR methodology into municipal planning for Petropavlovsk, a city exposed to annual Esil River flooding.',
-          'Author the Concept for Petropavlovsk’s Master Plan, embedding climate adaptation, DRR and resilience measures into long-term municipal strategy.',
+          'Author the Concept for Petropavlovsk’s Climate Master Plan, embedding climate adaptation, DRR and resilience measures into long-term municipal strategy.',
           'Coordinate delivery between local government, UNDP and international technical experts.',
           'Line-manage a team of two planners.',
         ],
@@ -120,7 +120,7 @@ export const cv = {
       {
         role: 'Национальный консультант по градостроительству', org: 'ПРООН Казахстан', period: 'Июль 2025 — н. в.',
         points: [
-          'Разработала концепцию мастер-плана Петропавловска с интеграцией климатической устойчивости и снижения риска бедствий (DRR).',
+          'Разработала концепцию климатического мастер-плана Петропавловска с интеграцией климатической устойчивости и снижения риска бедствий (DRR).',
           'Координировала взаимодействие между местными органами власти, министерствами, ПРООН и международными экспертами.',
           'Руководила аналитическими материалами и стратегическими решениями по масштабированию подходов для других городов региона.',
         ],
