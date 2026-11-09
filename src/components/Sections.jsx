@@ -405,7 +405,7 @@ export function Media() {
 function ContactRow({ label, value, href, external = true }) {
   return (
     <div className="grid grid-cols-12 gap-x-4 py-4 border-b items-baseline" style={{ borderColor: 'color-mix(in srgb, currentColor 30%, transparent)' }}>
-      <span className="col-span-4 md:col-span-3 label opacity-80">{label}</span>
+      <span className="col-span-4 md:col-span-3 label">{label}</span>
       <span className="col-span-8 md:col-span-9 text-[18px] md:text-[22px] break-words">
         {href ? (
           <a href={href} {...(external ? { target: '_blank', rel: 'noreferrer' } : {})} className="ulink select-all">
@@ -427,7 +427,7 @@ export function Contact() {
     <section aria-labelledby="contact" className="inverse bg-contact text-on-contact">
       <div className="gutter mx-auto max-w-sheet py-16 md:py-28">
         <div className="grid grid-cols-12 gap-x-4 md:gap-x-6 border-t pt-3" style={{ borderColor: 'color-mix(in srgb, currentColor 70%, transparent)' }}>
-          <span className="col-span-12 md:col-span-2 label opacity-80">{t('sheet')} {sheetNo(lang, '06')}</span>
+          <span className="col-span-12 md:col-span-2 label">{t('sheet')} {sheetNo(lang, '06')}</span>
           <div className="col-span-12 md:col-span-10 min-w-0">
             <h2 id="contact" className="display uppercase text-contact-head text-[calc(var(--ds)*clamp(44px,8.6vw,140px))] mt-4 md:mt-0 break-words">
               {t('contact.title')}

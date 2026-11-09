@@ -36,8 +36,8 @@
   --feature: 245 0 135;
   --on-feature: 22 22 22;
   --contact: 245 0 135;
-  --on-contact: 22 22 22;
-  --contact-head: 22 22 22;
+  --on-contact: 245 242 236; /* ivory type on the pink contact band */
+  --contact-head: 245 242 236;
   --sel: 245 0 135;
   --on-sel: 22 22 22;
   --mark: 245 0 135;
