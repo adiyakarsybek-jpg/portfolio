@@ -58,7 +58,23 @@ function localizeProject(p, lang) {
   };
 }
 
+/* Visitors never see draft notes: any [bracketed placeholder] is removed,
+   and list entries or fields left empty are dropped. */
+const stripDraft = (s) => s.replace(/\s*\[[^\]]*\]/g, '').trim();
+function clean(v) {
+  if (typeof v === 'string') return stripDraft(v);
+  if (Array.isArray(v)) return v.map(clean).filter((x) => x !== '');
+  if (v && Object.getPrototypeOf(v) === Object.prototype) {
+    return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, clean(x)]));
+  }
+  return v;
+}
+
 function buildContent(lang) {
+  return clean(buildRaw(lang));
+}
+
+function buildRaw(lang) {
   const isRu = lang === 'ru';
   const projects = projectsEn.map((p) => localizeProject(p, lang));
   return {

@@ -207,7 +207,7 @@ export function CaseStudy({ slug }) {
     [t('case.meta.period'), p.years],
     [t('case.meta.status'), t(`status.${p.status}`) + (p.statusNote ? ' ' + p.statusNote : '')],
     [t('case.meta.themes'), p.themes.join(', ')],
-  ];
+  ].filter(([, v]) => v);
 
   const photoTile = (g, i, aspect = 'aspect-[4/3]', fit = 'object-contain p-2') => (
     <li key={g.src} className="min-w-0">
@@ -267,48 +267,53 @@ export function CaseStudy({ slug }) {
         </div>
 
         <div className="mt-10 md:mt-16">
-          <Block blue={blue} no="01" label={t('case.context')}><T as="p" className="text-[19px] leading-[1.6]">{p.context}</T></Block>
-          <Block blue={blue} no="02" label={t('case.challenge')}><T as="p" className="text-[clamp(22px,2.3vw,30px)] leading-[1.3] font-medium">{p.challenge}</T></Block>
-          <Block blue={blue} no="03" label={t('case.role')}><T as="p" className="text-[19px] leading-[1.6]">{p.role}</T></Block>
-          <Block blue={blue} no="04" label={t('case.approach')}>
-            <ol className="space-y-4">
-              {p.approach.map((a, i) => (
-                <li key={i} className="grid grid-cols-[2.5rem_1fr] text-[17px] leading-[1.55]">
-                  <span className="label text-accent-ink tabular pt-1">{t('case.steps')[i] || i + 1}.</span>
-                  <T>{a}</T>
-                </li>
-              ))}
-            </ol>
-          </Block>
-          <Block blue={blue} no="05" label={t('case.outputs')}>
-            <ul className="border-t border-strong">
-              {p.outputs.map((o, i) => (
-                <li key={i} className="py-3 border-b border-rule text-[17px] flex gap-3">
-                  {blue && <span aria-hidden="true" className="mt-[0.55em] w-2 h-2 shrink-0" style={{ background: BLUE }} />}
-                  <T>{o}</T>
-                </li>
-              ))}
-            </ul>
-          </Block>
-          <Block blue={blue} no="06" label={t('case.outcomes')}>
-            <T as="p" className="text-[clamp(22px,2.3vw,30px)] leading-[1.3] font-medium">{p.outcomes}</T>
-          </Block>
-          {p.collaborators?.length > 0 && (
-            <Block blue={blue} no="07" label={t('case.collaborators')}>
+          {[
+            p.context && [t('case.context'), <T as="p" className="text-[19px] leading-[1.6]">{p.context}</T>],
+            p.challenge && [t('case.challenge'), <T as="p" className="text-[clamp(22px,2.3vw,30px)] leading-[1.3] font-medium">{p.challenge}</T>],
+            p.role && [t('case.role'), <T as="p" className="text-[19px] leading-[1.6]">{p.role}</T>],
+            p.approach?.length > 0 && [
+              t('case.approach'),
+              <ol className="space-y-4">
+                {p.approach.map((a, i) => (
+                  <li key={i} className="grid grid-cols-[2.5rem_1fr] text-[17px] leading-[1.55]">
+                    <span className="label text-accent-ink tabular pt-1">{t('case.steps')[i] || i + 1}.</span>
+                    <T>{a}</T>
+                  </li>
+                ))}
+              </ol>,
+            ],
+            p.outputs?.length > 0 && [
+              t('case.outputs'),
+              <ul className="border-t border-strong">
+                {p.outputs.map((o, i) => (
+                  <li key={i} className="py-3 border-b border-rule text-[17px] flex gap-3">
+                    {blue && <span aria-hidden="true" className="mt-[0.55em] w-2 h-2 shrink-0" style={{ background: BLUE }} />}
+                    <T>{o}</T>
+                  </li>
+                ))}
+              </ul>,
+            ],
+            p.outcomes && [t('case.outcomes'), <T as="p" className="text-[clamp(22px,2.3vw,30px)] leading-[1.3] font-medium">{p.outcomes}</T>],
+            p.collaborators?.length > 0 && [
+              t('case.collaborators'),
               <ul className="flex flex-wrap gap-2">
                 {p.collaborators.map((c) => (
                   <li key={c} className="chip text-[15px] border border-rule px-3 py-1.5 bg-sheet"><T>{c}</T></li>
                 ))}
-              </ul>
-            </Block>
-          )}
+              </ul>,
+            ],
+          ]
+            .filter(Boolean)
+            .map(([label, body], i) => (
+              <Block key={label} blue={blue} no={String(i + 1).padStart(2, '0')} label={label}>{body}</Block>
+            ))}
         </div>
 
         {/* Photos, documents and links */}
+        {(p.gallery.length > 0 || viewDocs.length > 0 || p.docs.length > 0 || p.links.length > 0 || p.credits) && (
         <section aria-labelledby="materials" className="border-t border-strong pt-3 mt-6">
           <h2 id="materials" className="label text-mute mb-6">{t('case.materials')}</h2>
 
-          {p.gallery.length === 0 && <p className="label text-mute">{t('case.photos.none')}</p>}
 
           {/* Album: always open, with a swipeable viewer */}
           {p.gallery.length > 0 && p.album && (
@@ -423,6 +428,7 @@ export function CaseStudy({ slug }) {
             </p>
           )}
         </section>
+        )}
 
         {/* Prev / next */}
         <nav aria-label={t('case.next')} className="grid grid-cols-1 md:grid-cols-2 border-t border-strong mt-16 md:mt-24">

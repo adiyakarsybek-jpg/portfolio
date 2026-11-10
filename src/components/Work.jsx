@@ -152,9 +152,6 @@ function Archive() {
           );
         })}
       </ul>
-      <p className="label text-mute mt-4">
-        <T>{t('archive.note')}</T>
-      </p>
     </div>
   );
 }

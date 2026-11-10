@@ -1,24 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLang } from '../i18n/index.jsx';
 
-/* Renders a string; any [bracketed text] becomes a visible editorial placeholder. */
+/* Renders a string; any [bracketed draft note] is dropped. */
 export function T({ children, as: Tag = 'span', className = '' }) {
-  const { t } = useLang();
   if (typeof children !== 'string') return <Tag className={className}>{children}</Tag>;
-  const parts = children.split(/(\[[^\]]+\])/g).filter(Boolean);
-  return (
-    <Tag className={className}>
-      {parts.map((part, i) =>
-        part.startsWith('[') && part.endsWith(']') ? (
-          <span key={i} className="tbc" title={t('ph.title')}>
-            {part.slice(1, -1)}
-          </span>
-        ) : (
-          <span key={i}>{part}</span>
-        ),
-      )}
-    </Tag>
-  );
+  // Draft placeholders in [brackets] are never shown to visitors.
+  return <Tag className={className}>{children.replace(/\s*\[[^\]]*\]/g, '')}</Tag>;
 }
 
 export const isPlaceholder = (s) => typeof s === 'string' && /^\[.*\]$/.test(s.trim());

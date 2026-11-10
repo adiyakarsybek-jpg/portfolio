@@ -123,7 +123,6 @@ export function Initiatives() {
             );
           })}
         </ul>
-        <p className="label opacity-75 mt-4">{t('initiatives.note')}</p>
       </div>
     </section>
   );
