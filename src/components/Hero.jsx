@@ -14,14 +14,14 @@ export function Header() {
       <div className="gutter mx-auto max-w-sheet flex items-center justify-between h-14">
         <a href="#top" className="flex items-baseline gap-3" onClick={() => setOpen(false)}>
           <span className="display text-[20px] leading-none">AK</span>
-          <span className="label text-graphite hidden sm:inline">{t('header.tagline')}</span>
+          <span className="label text-graphite hidden min-[1400px]:inline whitespace-nowrap">{t('header.tagline')}</span>
         </a>
         <div className="flex items-center gap-6 lg:gap-8">
         <nav aria-label="Main" className="hidden md:block">
           <ul className="flex gap-5 lg:gap-7">
             {NAV.map((n) => (
               <li key={n}>
-                <a href={`#${n}`} className="label text-ink hover:text-accent-ink transition-colors">{t(`nav.${n}`)}</a>
+                <a href={`#${n}`} className="label text-ink hover:text-accent-ink transition-colors whitespace-nowrap">{t(`nav.${n}`)}</a>
               </li>
             ))}
           </ul>

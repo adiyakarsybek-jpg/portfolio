@@ -161,7 +161,7 @@ export const ui = {
     'lang.label': 'Язык',
     'palette.label': 'Палитра',
     'skip': 'Перейти к проектам',
-    'header.tagline': 'Адия Карсыбек — урбанист',
+    'header.tagline': 'Адия Карсыбек — эксперт в области городского планирования и развития',
     'menu.open': 'Меню',
     'menu.close': 'Закрыть',
     'sheet': 'Лист',
