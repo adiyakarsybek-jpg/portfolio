@@ -311,12 +311,15 @@ export function About() {
             <Reveal>
               <p className="text-[clamp(22px,2.4vw,32px)] leading-[1.3] font-medium max-w-[36ch]">{bio.lead}</p>
             </Reveal>
-            <div className="mt-8 grid md:grid-cols-2 gap-x-8 gap-y-5 text-[17px] text-graphite">
-              {bio.paragraphs.map((p, i) => (
-                <p key={i} className={i === 0 ? 'md:col-span-2 max-w-[66ch]' : ''}>
-                  {p}
-                </p>
-              ))}
+            <div className="mt-8 text-[17px] text-graphite">
+              <p className="max-w-[66ch]">{bio.paragraphs[0]}</p>
+              <div className="mt-5 md:columns-2 md:gap-8">
+                {bio.paragraphs.slice(1).map((p, i) => (
+                  <p key={i} className="break-inside-avoid mb-5">
+                    {p}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
         </div>
