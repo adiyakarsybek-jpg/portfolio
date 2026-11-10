@@ -71,7 +71,9 @@ function clean(v) {
 }
 
 function buildContent(lang) {
-  return clean(buildRaw(lang));
+  const c = clean(buildRaw(lang));
+  // Derive the project lists after cleaning so they share the same objects.
+  return { ...c, featured: c.projects.filter((p) => p.featured), archive: c.projects.filter((p) => !p.featured) };
 }
 
 function buildRaw(lang) {
@@ -89,8 +91,6 @@ function buildRaw(lang) {
     expertise: isRu ? expertiseEn.map((e) => ({ ...e, ...(ru.expertiseRu[e.id] || {}) })) : expertiseEn,
     initiatives: isRu ? initiativesEn.map((i) => ({ ...i, ...(ru.initiativesRu[i.name] || {}) })) : initiativesEn,
     projects,
-    featured: projects.filter((p) => p.featured),
-    archive: projects.filter((p) => !p.featured),
   };
 }
 
