@@ -11,6 +11,17 @@ import letterMiir from '../assets/about/letter-miir.webp';
 const AWARD_IMAGES = { diploma, pumarino, letterAkim, letterCra, letterMiir };
 import { Arrow, PlaceholderArt, Reveal, SectionHead, T } from './primitives.jsx';
 
+/* **word** → highlighted key term (place, project, organisation) */
+function Rich({ text }) {
+  return text.split(/(\*\*[^*]+\*\*)/g).filter(Boolean).map((part, i) =>
+    part.startsWith('**') ? (
+      <strong key={i} className="font-semibold text-ink">{part.slice(2, -2)}</strong>
+    ) : (
+      part
+    ),
+  );
+}
+
 const sheetNo = (lang, n) => `${lang === 'ru' ? 'А' : 'A'}-${n}`;
 
 /* ------------------------------------------------------------------ EXPERTISE */
@@ -327,16 +338,19 @@ export function About() {
             <Reveal>
               <p className="text-[clamp(22px,2.4vw,32px)] leading-[1.3] font-medium max-w-[36ch]">{bio.lead}</p>
             </Reveal>
-            <div className="mt-8 text-[17px] text-graphite">
-              <p className="max-w-[66ch]">{bio.paragraphs[0]}</p>
-              <div className="mt-5 md:columns-2 md:gap-8">
-                {bio.paragraphs.slice(1).map((p, i) => (
-                  <p key={i} className="break-inside-avoid mb-5">
-                    {p}
-                  </p>
-                ))}
-              </div>
-            </div>
+            <dl className="mt-10 border-t border-strong">
+              {bio.paragraphs.map((p) => (
+                <div key={p.label} className="grid sm:grid-cols-[11rem_1fr] gap-x-6 gap-y-2 py-5 border-b border-rule">
+                  <dt className="label">
+                    <span className="block text-ink">{p.label}</span>
+                    <span className="block text-mute tabular mt-1">{p.years}</span>
+                  </dt>
+                  <dd className="text-[17px] leading-[1.6] text-graphite max-w-[62ch]">
+                    <Rich text={p.text} />
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </div>
 

@@ -28,13 +28,28 @@ export const contact = {
 export const bio = {
   lead:
     'Adiya Karsybek is a Kazakhstan-based urban planning and development professional working across urban strategy, research, policy, climate resilience, and collaborative initiatives.',
+  // Short paragraphs; **double asterisks** highlight places, projects and organisations.
   paragraphs: [
-    'My professional journey began in Almaty, where I worked on urban development projects within municipal organisations. At the Almaty Development Centre, I contributed to the establishment of Kazakhstan’s first urban studies centre and worked alongside colleagues from Gehl Architects on public space research and guidelines. I was also part of the WeAlmaty programme, an EU-funded initiative implemented by a partnership of local and international organisations, including the British Council. As a project manager representing the Almaty Development Centre, I supported programme coordination, stakeholder engagement, and the delivery of activities.',
-    'At AlmatyElectroTrans, I worked on urban mobility and road safety initiatives, including Vision Zero and street improvement projects.',
-    'I later joined Turkistan City Lab, where I worked on urban design and public space projects. In 2021, I co-founded Q88, an association focused on sustainable territorial development. Through Q88, I contributed to urban development strategies for Pavlodar and Atyrau, as well as a UNICEF-supported national guide to inclusive play spaces.',
-    'In 2024, I graduated with Distinction from the Bartlett School of Planning at University College London, supported by the Bolashak scholarship. My dissertation explored gender and leadership in Kazakhstan’s planning profession and received the Pumarino-Orbeta Prize. It was also shortlisted for the RTPI Research Excellence Awards.',
-    'After returning to Kazakhstan, I joined BI Group, where I worked on developing a landscape planning and product strategy function, contributing to its initial concept and approach.',
-    'I currently work with UNDP Kazakhstan on urban resilience and climate adaptation in Petropavlovsk. Alongside my professional work, I founded Ayel&Qala, an initiative supporting women’s participation and leadership in urban development.',
+    {
+      label: 'Almaty',
+      years: '2016–2020',
+      text: 'My career began in **Almaty**, in municipal organisations. At the **Almaty Development Centre** I contributed to Kazakhstan’s first urban studies centre, worked with **Gehl Architects** on public space guidelines, and as a project manager supported the EU-funded **WeAlmaty** programme with partners including the **British Council**. At **AlmatyElectroTrans** I worked on road safety and streets under **Vision Zero**.',
+    },
+    {
+      label: 'Turkistan · Q88',
+      years: '2020–2022',
+      text: 'At **Turkistan City Lab** I worked on urban design and public space projects. In 2021 I co-founded **Q88**, contributing to development strategies for **Pavlodar** and **Atyrau** and a **UNICEF**-supported national guide to inclusive play spaces.',
+    },
+    {
+      label: 'London',
+      years: '2022–2024',
+      text: 'I graduated with Distinction from **The Bartlett School of Planning, UCL**, on a **Bolashak** scholarship. My dissertation on gender and leadership in Kazakhstan’s planning profession received the **Pumarino-Orbeta Prize** and was shortlisted for the **RTPI** Research Excellence Awards.',
+    },
+    {
+      label: 'Kazakhstan',
+      years: 'now',
+      text: 'At **BI Group** I helped shape a new landscape planning and product strategy function. I now work with **UNDP Kazakhstan** on urban resilience and climate adaptation in **Petropavlovsk**, and I founded **Ayel&Qala**, an initiative supporting women in urban development.',
+    },
   ],
 };
 
