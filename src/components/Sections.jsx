@@ -4,8 +4,11 @@ import { cv } from '../data/cv.js';
 import portrait from '../assets/about/portrait.jpg';
 import diploma from '../assets/about/ucl-diploma.jpg';
 import pumarino from '../assets/about/pumarino-prize.jpg';
+import letterAkim from '../assets/about/letter-akim.webp';
+import letterCra from '../assets/about/letter-cra.webp';
+import letterMiir from '../assets/about/letter-miir.webp';
 
-const AWARD_IMAGES = { diploma, pumarino };
+const AWARD_IMAGES = { diploma, pumarino, letterAkim, letterCra, letterMiir };
 import { Arrow, PlaceholderArt, Reveal, SectionHead, T } from './primitives.jsx';
 
 const sheetNo = (lang, n) => `${lang === 'ru' ? 'А' : 'A'}-${n}`;
@@ -179,6 +182,20 @@ function ListBlock({ title, items }) {
                   <img src={AWARD_IMAGES[it.image.key]} alt={it.image.alt} loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} className="block w-full h-auto" />
                 </span>
               </button>
+            )}
+            {it.images && (
+              <ul className="grid grid-cols-3 gap-2 mt-3">
+                {it.images.map((im) => (
+                  <li key={im.key} className="min-w-0">
+                    <button type="button" onClick={() => setView(im)} className="block w-full text-left" aria-label={im.alt}>
+                      <span className="plate block aspect-square border border-rule bg-white overflow-hidden">
+                        <img src={AWARD_IMAGES[im.key]} alt={im.alt} loading="lazy" draggable="false" onContextMenu={(e) => e.preventDefault()} className="block w-full h-full object-cover object-top" />
+                      </span>
+                    </button>
+                    {im.caption && <span className="block label text-mute mt-1.5 leading-snug">{im.caption}</span>}
+                  </li>
+                ))}
+              </ul>
             )}
             {(it.doc || it.link) && (
               <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2">

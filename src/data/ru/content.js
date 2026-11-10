@@ -51,8 +51,20 @@ export const recognitionRu = [
   },
   { title: 'RTPI Awards for Research Excellence — шорт-лист', place: 'Категория Student Dissertation Award, Королевский институт городского планирования (RTPI)' },
   { title: 'Стипендия «Болашак»', place: 'Правительство Республики Казахстан' },
-  { title: 'Премия креативных индустрий Steppe Award', place: 'Номинация «Урбанистика»' },
-  { title: 'Благодарственные письма', place: 'Аким г. Алматы; Центр развития г. Алматы; Министр индустрии и инфраструктурного развития РК' },
+  {
+    title: 'Steppe Awards 2025 — «Лучшая городская инициатива»',
+    place: 'Ayel&Qala, категория «Урбанистика» премии в области креативных индустрий Steppe Awards',
+    link: { title: 'The Steppe', url: 'https://the-steppe.com/steppe-awards/stali-izvestny-imena-pobeditelej-premii-v-oblasti-kreativnyh-industrij-steppe-awards-2025' },
+  },
+  {
+    title: 'Благодарственные письма',
+    place: 'Аким г. Алматы; Центр развития г. Алматы; Министерство индустрии и инфраструктурного развития РК',
+    images: [
+      { key: 'letterAkim', caption: 'Аким г. Алматы, 2017', alt: 'Благодарственное письмо акима г. Алматы, 2017' },
+      { key: 'letterCra', caption: 'Центр развития г. Алматы, 2017', alt: 'Благодарственное письмо Центра развития г. Алматы, 2017' },
+      { key: 'letterMiir', caption: 'Министерство индустрии и инфраструктурного развития РК', alt: 'Благодарственное письмо Министерства индустрии и инфраструктурного развития РК' },
+    ],
+  },
 ];
 
 export const teachingRu = [

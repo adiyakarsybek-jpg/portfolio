@@ -72,8 +72,21 @@ export const recognition = [
     link: { title: 'RTPI', url: 'https://www.rtpi.org.uk/events-training-and-awards/awards/rtpi-awards-for-research-excellence/adiya-karsybek-ucl/' },
   },
   { title: 'Bolashak scholarship', place: 'Government of Kazakhstan', year: '2022–2024' },
-  { title: 'Steppe Award for creative industries', place: '“Urban Studies” category' },
-  { title: 'Letters of appreciation', place: 'Mayor of Almaty; Almaty Development Centre; Minister of Industry and Infrastructure Development of Kazakhstan' },
+  {
+    title: 'Steppe Awards 2025 — Best Urban Initiative',
+    place: 'Ayel&Qala, “Urbanism” category of the Steppe Awards for creative industries',
+    year: '2025',
+    link: { title: 'The Steppe', url: 'https://the-steppe.com/steppe-awards/stali-izvestny-imena-pobeditelej-premii-v-oblasti-kreativnyh-industrij-steppe-awards-2025' },
+  },
+  {
+    title: 'Letters of appreciation',
+    place: 'Akim of Almaty; Almaty Development Centre; Ministry of Industry and Infrastructure Development of Kazakhstan',
+    images: [
+      { key: 'letterAkim', caption: 'Akim of Almaty, 2017', alt: 'Letter of appreciation from the Akim of Almaty, 2017' },
+      { key: 'letterCra', caption: 'Almaty Development Centre, 2017', alt: 'Letter of appreciation from the Almaty Development Centre, 2017' },
+      { key: 'letterMiir', caption: 'Ministry of Industry and Infrastructure Development', alt: 'Letter of appreciation from the Ministry of Industry and Infrastructure Development of Kazakhstan' },
+    ],
+  },
 ];
 
 export const teaching = [
