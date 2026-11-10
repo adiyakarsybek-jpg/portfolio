@@ -84,7 +84,7 @@ export const recognition = [
     images: [
       { key: 'letterAkim', caption: 'Akim of Almaty, 2017', alt: 'Letter of appreciation from the Akim of Almaty, 2017' },
       { key: 'letterCra', caption: 'Almaty Development Centre, 2017', alt: 'Letter of appreciation from the Almaty Development Centre, 2017' },
-      { key: 'letterMiir', caption: 'Ministry of Industry and Infrastructure Development', alt: 'Letter of appreciation from the Ministry of Industry and Infrastructure Development of Kazakhstan' },
+      { key: 'letterMiir', caption: 'Ministry of Industry and Infrastructure Development, 2021', alt: 'Letter of appreciation from the Ministry of Industry and Infrastructure Development of Kazakhstan, 2021' },
     ],
   },
 ];
